@@ -1,0 +1,12 @@
+c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\bin\MovieWiki.dll.config
+c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\bin\MovieWiki.dll
+c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\bin\MovieWiki.pdb
+c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\obj\Debug\MovieWiki.csprojResolveAssemblyReference.cache
+c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\obj\Debug\MovieWiki.dll
+c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\obj\Debug\MovieWiki.pdb
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\bin\MovieWiki.dll.config
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\bin\MovieWiki.dll
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\bin\MovieWiki.pdb
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\obj\Debug\MovieWiki.csprojResolveAssemblyReference.cache
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\obj\Debug\MovieWiki.dll
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\obj\Debug\MovieWiki.pdb

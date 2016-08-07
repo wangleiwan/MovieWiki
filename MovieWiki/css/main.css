@@ -1,0 +1,40 @@
+﻿.content {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logInSection {
+    width: 40%;
+}
+
+.loginTitle {
+    font-size: 24px;
+}
+
+#brandIcon {
+    width: 35px;
+    height: 35px;
+}
+
+.navbar-brand {
+    padding: 6px;
+}
+
+.title {
+    display: inline-block;
+    font-size: 22px;
+    margin-right: 20px;
+}
+
+.titleSearch {
+    width: 1000px;
+}
+
+input#searchInput.form-control {
+    width: 450px;
+}
+
+
+
