@@ -7,7 +7,7 @@
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="../css/main.css" rel="stylesheet" />
     <link href="../css/font-awesome.css" rel="stylesheet" />
-    <script src="../js/jquery-3.1.0.min.js"></script>
+    <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js" ></script>
     <title>Registration</title>
 </head>

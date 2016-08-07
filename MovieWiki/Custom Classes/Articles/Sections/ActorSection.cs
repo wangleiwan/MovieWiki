@@ -8,14 +8,15 @@ namespace MovieWiki.Custom_Classes
 {
     public class ActorSection : RoleSection
     {
-        public override List<TableRow> BuildControls()
+        public override List<Panel> BuildControls(string moviesStarredIn = null)
         {
-            var actorRows = new List<TableRow>();
-            var charactersPortrayed = WebControlBuilder.BuildLabelTextBoxPair("lblCharactersPortrayed", "Characters portrayed", "ActorSection",
-                                TextBoxMode.MultiLine, rowSpan: 5);
-            actorRows.Add(WebControlBuilder.BuildTableRow(charactersPortrayed.Item1, charactersPortrayed.Item2));
 
-            return actorRows;
+            var actorPanel= new List<Panel>();
+            var charactersPortrayed = WebControlBuilder.BuildLabelTextBoxPair("lblCharactersPortrayed", "Characters portrayed", "ActorSection",
+                                moviesStarredIn, TextBoxMode.MultiLine, rowSpan: 5);
+            actorPanel.Add(WebControlBuilder.BuildPanel(charactersPortrayed.Item1, charactersPortrayed.Item2));
+
+            return actorPanel;
         }
     }
 }

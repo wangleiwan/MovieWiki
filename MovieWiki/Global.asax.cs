@@ -12,6 +12,7 @@ namespace MovieWiki
     {
         public const string ActiveUserAccount = "ActiveUserAccount";
         public const string ActiveArticle = "ActiveArticle";
+        public const string ShowArticleUrlWithId = "ShowArticle.aspx?id={0}";
 
         protected void Application_Start(object sender, EventArgs e)
         {

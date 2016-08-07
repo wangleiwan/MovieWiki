@@ -22,13 +22,13 @@ namespace MovieWiki.Web_Forms {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// lblError control.
+        /// panelHeading control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Panel panelHeading;
         
         /// <summary>
         /// lblArticleTemplateHeader control.
@@ -40,13 +40,22 @@ namespace MovieWiki.Web_Forms {
         protected global::System.Web.UI.WebControls.Label lblArticleTemplateHeader;
         
         /// <summary>
-        /// tblArticleContent control.
+        /// pnlArticleContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblArticleContent;
+        protected global::System.Web.UI.WebControls.Panel pnlArticleContent;
+        
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
         /// btnCreateArticle control.

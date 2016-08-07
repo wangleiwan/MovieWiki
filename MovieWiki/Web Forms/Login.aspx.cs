@@ -14,7 +14,11 @@ namespace MovieWiki.Web_Forms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // If the user is already logged in, redirect to the homepage
+            if (Session[Global.ActiveUserAccount] != null)
+            {
+                Response.Redirect("Default.aspx");
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

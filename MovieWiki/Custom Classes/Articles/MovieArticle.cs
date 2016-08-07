@@ -13,15 +13,15 @@ namespace MovieWiki.Custom_Classes
     {
         public string Theme { get; set; }
         public string Characters { get; set; }
+        public string Language { get; set; }
         // change to TimeSpan?
         public string Duration { get; set; }
 
         public MovieArticle() { }
 
-        public MovieArticle(int articleId, int author, string title, string description)
+        public MovieArticle(int articleId, string title, string description)
         {
             ArticleId = articleId;
-            Author = author;
             Title = title;
             ParseData(description);
         }
@@ -33,26 +33,27 @@ namespace MovieWiki.Custom_Classes
             Theme = xml.Elements("Theme").FirstOrDefault().Value;
             Characters = xml.Elements("Characters").FirstOrDefault().Value;
             Duration = xml.Elements("Duration").FirstOrDefault().Value;
+            Language = xml.Elements("Language").FirstOrDefault().Value;
         }
 
-        public override List<TableRow> BuildControls(string[] parameters)
+        public override List<Panel> BuildControls()
         {
-            var baseRows = base.BuildControls(null);
+            var basePanels = base.BuildControls();
 
-            var movieRows = new List<TableRow>();
-            var theme = WebControlBuilder.BuildLabelTextBoxPair("lblTheme", "Theme", "Theme");
+            var moviePanels = new List<Panel>();
+            var theme = WebControlBuilder.BuildLabelTextBoxPair("lblTheme", "Theme", "Theme", Theme);
             var characters = WebControlBuilder.BuildLabelTextBoxPair("lblCharacters", "Characters", "Characters",
-                TextBoxMode.MultiLine, rowSpan: 5);
-            var language = WebControlBuilder.BuildLabelTextBoxPair("lblLanguage", "Language", "Language");
-            var duration = WebControlBuilder.BuildLabelTextBoxPair("lblDuration", "Duration", "Duration");
-            movieRows.Add(WebControlBuilder.BuildTableRow(theme.Item1, theme.Item2));
-            movieRows.Add(WebControlBuilder.BuildTableRow(characters.Item1, characters.Item2));
-            movieRows.Add(WebControlBuilder.BuildTableRow(language.Item1, language.Item2));
-            movieRows.Add(WebControlBuilder.BuildTableRow(duration.Item1, duration.Item2));
+                Characters, TextBoxMode.MultiLine, rowSpan: 5);
+            var language = WebControlBuilder.BuildLabelTextBoxPair("lblLanguage", "Language", "Language", Language);
+            var duration = WebControlBuilder.BuildLabelTextBoxPair("lblDuration", "Duration", "Duration", Duration);
+            moviePanels.Add(WebControlBuilder.BuildPanel(theme.Item1, theme.Item2));
+            moviePanels.Add(WebControlBuilder.BuildPanel(characters.Item1, characters.Item2));
+            moviePanels.Add(WebControlBuilder.BuildPanel(language.Item1, language.Item2));
+            moviePanels.Add(WebControlBuilder.BuildPanel(duration.Item1, duration.Item2));
 
-            baseRows.InsertRange(1, movieRows);
+            basePanels.InsertRange(1, moviePanels);
 
-            return baseRows;
+            return basePanels;
         }
 
         public override string ToString()

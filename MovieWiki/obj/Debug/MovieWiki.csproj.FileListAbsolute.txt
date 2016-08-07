@@ -1,9 +1,20 @@
 c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\bin\MovieWiki.dll.config
 c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\bin\MovieWiki.dll
 c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\bin\MovieWiki.pdb
-c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\obj\Debug\MovieWiki.csprojResolveAssemblyReference.cache
 c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\obj\Debug\MovieWiki.dll
 c:\users\nick\documents\visual studio 2013\Projects\MovieWiki\MovieWiki\obj\Debug\MovieWiki.pdb
+C:\Users\Noe\Desktop\School Stuff\Semester 4\C#\Project\NEW\MovieWiki\MovieWiki\bin\MovieWiki.dll.config
+C:\Users\Noe\Desktop\School Stuff\Semester 4\C#\Project\NEW\MovieWiki\MovieWiki\bin\MovieWiki.dll
+C:\Users\Noe\Desktop\School Stuff\Semester 4\C#\Project\NEW\MovieWiki\MovieWiki\bin\MovieWiki.pdb
+C:\Users\Noe\Desktop\School Stuff\Semester 4\C#\Project\NEW\MovieWiki\MovieWiki\obj\Debug\MovieWiki.dll
+C:\Users\Noe\Desktop\School Stuff\Semester 4\C#\Project\NEW\MovieWiki\MovieWiki\obj\Debug\MovieWiki.pdb
+C:\Users\Noe\Desktop\School Stuff\Semester 4\C#\Project\NEW\MovieWiki\MovieWiki\obj\Debug\MovieWiki.csprojResolveAssemblyReference.cache
+C:\Users\Nick\Desktop\MovieWiki - Peter sln Merged With Noe sln\MovieWiki\bin\MovieWiki.dll.config
+C:\Users\Nick\Desktop\MovieWiki - Peter sln Merged With Noe sln\MovieWiki\bin\MovieWiki.dll
+C:\Users\Nick\Desktop\MovieWiki - Peter sln Merged With Noe sln\MovieWiki\bin\MovieWiki.pdb
+C:\Users\Nick\Desktop\MovieWiki - Peter sln Merged With Noe sln\MovieWiki\obj\Debug\MovieWiki.dll
+C:\Users\Nick\Desktop\MovieWiki - Peter sln Merged With Noe sln\MovieWiki\obj\Debug\MovieWiki.pdb
+C:\Users\Nick\Desktop\MovieWiki - Peter sln Merged With Noe sln\MovieWiki\obj\Debug\MovieWiki.csprojResolveAssemblyReference.cache
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\bin\MovieWiki.dll.config
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\bin\MovieWiki.dll
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWiki\bin\MovieWiki.pdb

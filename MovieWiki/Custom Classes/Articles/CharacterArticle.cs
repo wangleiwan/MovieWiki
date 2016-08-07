@@ -14,10 +14,9 @@ namespace MovieWiki.Custom_Classes
 
         public CharacterArticle() { }
 
-        public CharacterArticle(int articleId, int author, string title, string description)
+        public CharacterArticle(int articleId, string title, string description)
         {
             ArticleId = articleId;
-            Author = author;
             Title = title;
             ParseData(description);
         }
@@ -30,20 +29,20 @@ namespace MovieWiki.Custom_Classes
             IsFictional = Convert.ToBoolean(xml.Elements("IsFictional").FirstOrDefault().Value);
         }
 
-        public override List<TableRow> BuildControls(string[] parameters)
+        public override List<Panel> BuildControls()
         {
-            var baseRows = base.BuildControls(null);
-            var characterRows = new List<TableRow>();
+            var basePanels = base.BuildControls();
+            var characterPanels = new List<Panel>();
             var moviesAppeared = WebControlBuilder.BuildLabelTextBoxPair("lblMoviesAppearedIn", "Movies appeared in", "MoviesAppearedIn",
-                TextBoxMode.MultiLine, rowSpan: 5);
-            var fictionaryCharacter = WebControlBuilder.BuildLabelCheckBoxPair("lblIsFictional", "Fictional character?", "IsFictional");
-            characterRows.Add(WebControlBuilder.BuildTableRow(moviesAppeared.Item1, moviesAppeared.Item2));
-            characterRows.Add(WebControlBuilder.BuildTableRow(fictionaryCharacter.Item1, fictionaryCharacter.Item2));
+                MoviesAppearedIn, TextBoxMode.MultiLine, rowSpan: 5);
+            var fictionalCharacter = WebControlBuilder.BuildLabelCheckBoxPair("lblIsFictional", "Fictional character?", "IsFictional", IsFictional);
+            characterPanels.Add(WebControlBuilder.BuildPanel(moviesAppeared.Item1, moviesAppeared.Item2));
+            characterPanels.Add(WebControlBuilder.BuildPanel(fictionalCharacter.Item1, fictionalCharacter.Item2));
 
             // Insert all before the last description textarea
-            baseRows.InsertRange(baseRows.Count - 1, characterRows);
+            basePanels.InsertRange(basePanels.Count - 1, characterPanels);
 
-            return baseRows;
+            return basePanels;
         }
 
         public override string ToString()

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
+using System;
 
 namespace MovieWiki.Custom_Classes
 {
     public abstract class Article
     {
         public int ArticleId { get; set; }
-        public int Author { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -20,42 +20,48 @@ namespace MovieWiki.Custom_Classes
             Title = xml.Elements("Title").FirstOrDefault().Value;
         }
 
-        public virtual List<TableRow> BuildControls(string[] parameters)
+        public virtual List<Panel> BuildControls()
         {
-            var tableRows = new List<TableRow>();
+            var panels = new List<Panel>();
 
-            var title = WebControlBuilder.BuildLabelTextBoxPair("lblTitle", "Title", "Title");
-            tableRows.Add(WebControlBuilder.BuildTableRow(title.Item1, title.Item2));
+            var title = WebControlBuilder.BuildLabelTextBoxPair("lblTitle", "Title", "Title", Title);
+            
+            var titleVld = WebControlBuilder.BuildReqFieldValidator("Title", "vldTitle", "Enter a title for the article");
+            title.Item2.Controls.Add(titleVld);
+            panels.Add(WebControlBuilder.BuildPanel(title.Item1, title.Item2));
 
             var description = WebControlBuilder.BuildLabelTextBoxPair("lblDescription", "Description", "Description",
-                TextBoxMode.MultiLine, 40, 20);
-            tableRows.Add(WebControlBuilder.BuildTableRow(description.Item1, description.Item2));
+                Description, TextBoxMode.MultiLine, 40, 20);
+            panels.Add(WebControlBuilder.BuildPanel(description.Item1, description.Item2));
 
-            return tableRows;
+            return panels;
         }
 
         // Serializes ASP table content into database-ready XML
-        public virtual XElement ComposeXml(Control table)
+        public virtual XElement ComposeXml(Control panel)
         {
             var xml = new XElement(this.GetType().Name);
-            foreach (Control tableRows in table.Controls)
+            foreach (Control outerpanel in panel.Controls)
             {
-                var tr = tableRows as TableRow;
-                foreach (var tableCells in tr.Controls)
+                var op = outerpanel as Panel;
+                foreach (var innercontrol in op.Controls)
                 {
-                    var td = tableCells as TableCell;
-                    foreach (var child in td.Controls)
+                    var ic = innercontrol as Panel;
+                    if (ic != null)
                     {
-                        var textBox = child as TextBox;
-                        if (textBox != null)
+                        foreach (var child in ic.Controls)
                         {
-                            xml.Add(new XElement(textBox.ID, textBox.Text));
+                            var textBox = child as TextBox;
+                            if (textBox != null)
+                            {
+                                xml.Add(new XElement(textBox.ID, textBox.Text));
+                            }
                         }
-                        var checkBox = child as CheckBox;
-                        if (checkBox != null)
-                        {
-                            xml.Add(new XElement(checkBox.ID, checkBox.Checked));
-                        }
+                    }
+                    var checkBox = innercontrol as CheckBox;
+                    if (checkBox != null)
+                    {
+                        xml.Add(new XElement(checkBox.ID, checkBox.Checked));
                     }
                 }
             }

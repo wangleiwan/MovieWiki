@@ -13,26 +13,19 @@ namespace MovieWiki.Custom_Classes
         private RoleSectionFactory _roleSectionFactory = new RoleSectionFactory();
         public List<RoleSection> Roles { get; set; }
 
-        public CrewMemberArticle()
+        private CrewMemberArticle()
         {
             Roles = new List<RoleSection>();
         }
 
         public CrewMemberArticle(string[] roles) : this()
         {
-            if (roles != null)
-            {
-                foreach (var role in roles)
-                {
-                    Roles.Add(_roleSectionFactory.GetInstance(role));
-                }
-            }
+            AddRoles(roles);
         }
 
-        public CrewMemberArticle(int articleId, int author, string title, string descriptionXml) : this()
+        public CrewMemberArticle(int articleId, string title, string descriptionXml) : this()
         {
             ArticleId = articleId;
-            Author = author;
             Title = title;
             var parsedXml = XElement.Parse(descriptionXml);
         }
@@ -41,59 +34,76 @@ namespace MovieWiki.Custom_Classes
         {
             base.ParseData(articleData);
             var xml = XElement.Parse(articleData);
-            var roleSections = xml.Elements("RoleSections").FirstOrDefault();
+            var roleSectionsXml = xml.Elements("RoleSections").FirstOrDefault();
 
-            foreach (var role in roleSections.Elements())
+            string[] roles, roleValues;
+            if (roleSectionsXml != null && roleSectionsXml.Elements() != null)
             {
-                var r = _roleSectionFactory.GetInstance(role.Name.LocalName, role.Value);
-                Roles.Add(r);
+                roles = roleSectionsXml.Elements().Select(r => r.Name.LocalName).ToArray();
+                roleValues = roleSectionsXml.Elements().Select(r => r.Value).ToArray();
+                AddRoles(roles, roleValues);
             }
         }
 
-        public override List<TableRow> BuildControls(string[] parameters)
+        private void AddRoles(string[] roles, string[] roleValues = null)
         {
-            var baseRows = base.BuildControls(null);
-            var crewMemberRows = new List<TableRow>();
-            Roles.ForEach(r => crewMemberRows.AddRange(r.BuildControls()));
-
-            // Insert all before the last description textarea
-            baseRows.InsertRange(baseRows.Count - 1, crewMemberRows);
-
-            return baseRows;
+            if (roles != null)
+            {
+                for (int i = 0; i < roles.Length; i++) 
+                {
+                    var roleSection = _roleSectionFactory.GetInstance(roles[i],
+                        roleValues != null ? roleValues[i] : null);
+                    Roles.Add(roleSection);
+                }
+            }
         }
 
-        public override XElement ComposeXml(Control table)
+        public override List<Panel> BuildControls()
+        {
+            var basePanels = base.BuildControls();
+            var crewMemberPanels = new List<Panel>();
+            Roles.ForEach(r => crewMemberPanels.AddRange(r.BuildControls(r.Description)));
+
+            // Insert all before the last description textarea
+            basePanels.InsertRange(basePanels.Count - 1, crewMemberPanels);
+
+            return basePanels;
+        }
+
+        public override XElement ComposeXml(Control panel)
         {
             var xml = new XElement(this.GetType().Name);
             var xmlRoleSections = new XElement("RoleSections");
 
-            foreach (Control tableRows in table.Controls)
+            foreach (Control outerpanel in panel.Controls)
             {
-                var tr = tableRows as TableRow;
-                foreach (var tableCells in tr.Controls)
+                var op = outerpanel as Panel;
+                foreach (var innercontrol in op.Controls)
                 {
-                    var td = tableCells as TableCell;
-                    foreach (var child in td.Controls)
+                    var ic = innercontrol as Panel;
+                    if (ic != null)
                     {
-                        var textBox = child as TextBox;
-                        if (textBox != null)
+                        foreach (var child in ic.Controls)
                         {
-                            var xElement = new XElement(textBox.ID, textBox.Text);
-                            if (textBox.ID.Contains("Section"))
+                            var textBox = child as TextBox;
+                            if (textBox != null)
                             {
-                                xmlRoleSections.Add(xElement);
+                                var xElement = new XElement(textBox.ID, textBox.Text);
+                                if (textBox.ID.Contains("Section"))
+                                {
+                                    xmlRoleSections.Add(xElement);
+                                }
+                                else
+                                {
+                                    xml.Add(xElement);
+                                }
                             }
-                            else 
-                            {
-                                xml.Add(xElement);
-                            }
-                            
                         }
-                        var checkBox = child as CheckBox;
-                        if (checkBox != null)
-                        {
-                            xml.Add(new XElement(checkBox.ID, checkBox.Checked));
-                        }
+                    }
+                    var checkBox = innercontrol as CheckBox;
+                    if (checkBox != null)
+                    {
+                        xml.Add(new XElement(checkBox.ID, checkBox.Checked));
                     }
                 }
             }

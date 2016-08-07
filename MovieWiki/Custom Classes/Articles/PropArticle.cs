@@ -14,10 +14,9 @@ namespace MovieWiki.Custom_Classes
 
         public PropArticle() { }
 
-        public PropArticle(int articleId, int author, string title, string description)
+        public PropArticle(int articleId, string title, string description)
         {
             ArticleId = articleId;
-            Author = author;
             Title = title;
             ParseData(description);
         }
@@ -30,19 +29,19 @@ namespace MovieWiki.Custom_Classes
             Function = xml.Elements("Function").FirstOrDefault().Value;
         }
 
-        public override List<TableRow> BuildControls(string[] parameters)
+        public override List<Panel> BuildControls()
         {
-            var baseRows = base.BuildControls(null);
-            var propRows = new List<TableRow>();
+            var basePanels = base.BuildControls();
+            var propPanels = new List<Panel>();
             var moviesFeatured = WebControlBuilder.BuildLabelTextBoxPair("lblMoviesFeaturedIn", "Movies featured in", "MoviesFeaturedIn",
-                TextBoxMode.MultiLine, rowSpan: 5);
-            var function = WebControlBuilder.BuildLabelTextBoxPair("lblFunction", "Function", "Function");
-            propRows.Add(WebControlBuilder.BuildTableRow(moviesFeatured.Item1, moviesFeatured.Item2));
-            propRows.Add(WebControlBuilder.BuildTableRow(function.Item1, function.Item2));
+                MoviesFeaturedIn, TextBoxMode.MultiLine, rowSpan: 5);
+            var function = WebControlBuilder.BuildLabelTextBoxPair("lblFunction", "Function", "Function", Function);
+            propPanels.Add(WebControlBuilder.BuildPanel(moviesFeatured.Item1, moviesFeatured.Item2));
+            propPanels.Add(WebControlBuilder.BuildPanel(function.Item1, function.Item2));
 
-            baseRows.InsertRange(1, propRows);
+            basePanels.InsertRange(1, propPanels);
 
-            return baseRows;
+            return basePanels;
         }
 
         public override string ToString()

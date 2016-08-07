@@ -8,14 +8,15 @@ namespace MovieWiki.Custom_Classes
 {
     public class DirectorSection : RoleSection
     {
-        public override List<TableRow> BuildControls()
+        public override List<Panel> BuildControls(string moviesDirectedContent = null)
         {
-            var directorRows = new List<TableRow>();
-            var moviesDirected = WebControlBuilder.BuildLabelTextBoxPair("lblMoviesDirected", "Movies directed", "DirectorSection",
-                                TextBoxMode.MultiLine, rowSpan: 5);
-            directorRows.Add(WebControlBuilder.BuildTableRow(moviesDirected.Item1, moviesDirected.Item2));
 
-            return directorRows;
+            var directorPanel = new List<Panel>();
+            var moviesDirected = WebControlBuilder.BuildLabelTextBoxPair("lblMoviesDirected", "Movies directed", "DirectorSection",
+                                moviesDirectedContent, TextBoxMode.MultiLine, rowSpan: 5);
+            directorPanel.Add(WebControlBuilder.BuildPanel(moviesDirected.Item1, moviesDirected.Item2));
+
+            return directorPanel;
         }
     }
 }

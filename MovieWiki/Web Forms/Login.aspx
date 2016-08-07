@@ -6,11 +6,12 @@
 <head runat="server">
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="../css/main.css" rel="stylesheet" />
-    <script src="../js/jquery-3.1.0.min.js"></script>
+    <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js" ></script>
     <title>Login</title>
 </head>
 <body>
+    <!-- TODO add back hyperlink once Default.aspx isn't reliant on being logged in -->
     <!--<div class="container">-->
         <asp:Panel CssClass="container" runat="server">
         <div class="content">
@@ -54,3 +55,4 @@
     
 </body>
 </html>
+

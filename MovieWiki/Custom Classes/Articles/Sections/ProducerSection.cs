@@ -8,14 +8,14 @@ namespace MovieWiki.Custom_Classes
 {
     public class ProducerSection : RoleSection
     {
-        public override List<TableRow> BuildControls()
+        public override List<Panel> BuildControls(string moviesProducedContent = null)
         {
-            var producerRows = new List<TableRow>();
+            var producerPanel = new List<Panel>();
             var moviesProduced = WebControlBuilder.BuildLabelTextBoxPair("lblMoviesProduced", "Movies produced", "ProducerSection",
-                                TextBoxMode.MultiLine, rowSpan: 5);
-            producerRows.Add(WebControlBuilder.BuildTableRow(moviesProduced.Item1, moviesProduced.Item2));
+                                moviesProducedContent, TextBoxMode.MultiLine, rowSpan: 5);
+            producerPanel.Add(WebControlBuilder.BuildPanel(moviesProduced.Item1, moviesProduced.Item2));
 
-            return producerRows;
+            return producerPanel;
         }
     }
 }

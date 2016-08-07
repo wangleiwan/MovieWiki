@@ -21,11 +21,10 @@ namespace MovieWiki.Custom_Classes
         }
 
         // Used when getting articles from the database
-        public Article GetInstance(string articleType, int articleId, int author, string title, string description)
+        public Article GetInstance(string articleType, int articleId, string title, string description)
         {
             var article = GetInstance(articleType, null);
             article.ArticleId = articleId;
-            article.Author = author;
             article.Title = title;
             article.ParseData(description);
 

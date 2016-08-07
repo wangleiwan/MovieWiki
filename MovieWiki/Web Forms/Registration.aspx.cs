@@ -34,7 +34,6 @@ namespace MovieWiki.Web_Forms
                 lblCreateAccountErrorMsg.Text = string.Format(@"The account ""{0}"" already exists", username);
             }
         }
-
         protected void btnCancelCreateAccount_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx");

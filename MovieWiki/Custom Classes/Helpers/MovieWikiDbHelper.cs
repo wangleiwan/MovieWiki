@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MovieWiki.MovieWikiServiceReference;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -9,9 +11,8 @@ namespace MovieWiki.Custom_Classes
 {
     public static class MovieWikiDbHelper
     {
-        private static readonly string MovieWikiConnectionString = WebConfigurationManager
-                    .ConnectionStrings["MovieWikiConnectionString"].ConnectionString;
         private static readonly ArticleFactory ArticleFactory = new ArticleFactory();
+        private static MovieWikiServiceClient movieWikiServiceClient = new MovieWikiServiceClient();
 
         private static List<UserAccount> _allUserAccounts;
         public static List<UserAccount> AllUserAccounts
@@ -20,7 +21,7 @@ namespace MovieWiki.Custom_Classes
             {
                 if (_allUserAccounts == null)
                 {
-                    UpdateUserAccounts();
+                    UpdateUserAccountProp();
                 }
                 return _allUserAccounts;
             }
@@ -37,13 +38,30 @@ namespace MovieWiki.Custom_Classes
             {
                 if (_allWikiArticles == null)
                 {
-                    UpdateWikiArticles();
+                    UpdateWikiArticleProp();
                 }
                 return _allWikiArticles;
             }
             private set
             {
                 _allWikiArticles = value;
+            }
+        }
+
+        private static List<WikiArticleEditHistory> _allWikiArticleEditHistories;
+        public static List<WikiArticleEditHistory> AllWikiArticleEditHistories
+        {
+            get
+            {
+                if (_allWikiArticleEditHistories == null)
+                {
+                    UpdateWikiArticleEditHistoriesProp();
+                }
+                return _allWikiArticleEditHistories;
+            }
+            private set
+            {
+                _allWikiArticleEditHistories = value;
             }
         }
 
@@ -57,13 +75,12 @@ namespace MovieWiki.Custom_Classes
         private enum WikiArticleTable
         {
             ArticleId = 0,
-            Author = 1,
-            ArticleType = 2,
-            Title = 3,
-            Description = 4
+            ArticleType = 1,
+            Title = 2,
+            Description = 3
         }
 
-        private enum WikiArticleEditHistory
+        private enum WikiArticleEditHistoryTable
         {
             EditId = 0,
             ArticleId = 1,
@@ -71,27 +88,11 @@ namespace MovieWiki.Custom_Classes
             EditTimestamp = 3
         }
 
-        // TODO make list of wikiarticleedithistories functional
         public static bool InsertWikiArticleEditHistory(int aticleId, int accountId, DateTime timestamp)
         {
-            int rowsAffected;
-            using (var connection = new SqlConnection())
+            if (movieWikiServiceClient.InsertWikiArticleEditHistory(aticleId, accountId, timestamp) == 1)
             {
-                connection.ConnectionString = MovieWikiConnectionString;
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "INSERT INTO WikiArticleEditHistory VALUES(@aticleId, @accountId, @timestamp);";
-                    command.Parameters.AddWithValue("@aticleId", aticleId);
-                    command.Parameters.AddWithValue("@accountId", accountId);
-                    command.Parameters.AddWithValue("@timestamp", timestamp);
-
-                    connection.Open();
-                    rowsAffected = command.ExecuteNonQuery();
-                }
-            }
-            if (rowsAffected == 1)
-            {
-                //UpdateWikiArticleEditHistories
+                UpdateWikiArticleEditHistoriesProp();
                 return true;
             }
             else
@@ -100,29 +101,13 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
-        public static bool InsertWikiArticle(int authorId, string articleType, string title, string descriptionXml)
+        public static bool InsertWikiArticle(string articleType, string title, string descriptionXml)
         {
             if (IsExistingWikiArticle(title)) return false;
 
-            int rowsAffected;
-            using (var connection = new SqlConnection())
+            if (movieWikiServiceClient.InsertWikiArticle(articleType, title, descriptionXml) == 1)
             {
-                connection.ConnectionString = MovieWikiConnectionString;
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "INSERT INTO WikiArticle VALUES(@authorId, @articleType, @title, @description);";
-                    command.Parameters.AddWithValue("@authorId", authorId);
-                    command.Parameters.AddWithValue("@articleType", articleType);
-                    command.Parameters.AddWithValue("@title", title);
-                    command.Parameters.AddWithValue("@description", descriptionXml);
-
-                    connection.Open();
-                    rowsAffected = command.ExecuteNonQuery();
-                }
-            }
-            if (rowsAffected == 1)
-            {
-                UpdateWikiArticles();
+                UpdateWikiArticleProp();
                 return true;
             }
             else
@@ -131,43 +116,65 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
-        private static void UpdateWikiArticles()
+        public static bool UpdateWikiArticle(int articleId, string descriptionXml)
+        {
+            if (movieWikiServiceClient.UpdateWikiArticle(articleId, descriptionXml) == 1)
+            {
+                UpdateWikiArticleProp();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static void UpdateWikiArticleProp()
         {
             AllWikiArticles = GetAllWikiArticles();
         }
 
-        private static List<Article> GetAllWikiArticles()
+        public static bool DeleteWikiArticle(int articleId)
         {
-            var wikiArticles = new List<Article>();
-            using (var connection = new SqlConnection())
+            if (movieWikiServiceClient.DeleteWikiArticle(articleId) >= 1)
             {
-                connection.ConnectionString = MovieWikiConnectionString;
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "SELECT * FROM WikiArticle;";
-                    connection.Open();
-                    using (var result = command.ExecuteReader())
-                    {
-                        while (result.Read())
-                        {
-                            var articleId = Convert.ToInt32(result[(int)WikiArticleTable.ArticleId]);
-                            var author = Convert.ToInt32(result[(int)WikiArticleTable.Author]);
-                            var articleType = Convert.ToString(result[(int)WikiArticleTable.ArticleType]);
-                            var title = Convert.ToString(result[(int)WikiArticleTable.Title]);
-                            var description = Convert.ToString(result[(int)WikiArticleTable.Description]);
-
-                            var article = ArticleFactory.GetInstance(articleType, articleId, author, title, description);
-                            wikiArticles.Add(article);
-                        }
-                        return wikiArticles;
-                    }
-                }
+                UpdateWikiArticleProp();
+                UpdateWikiArticleEditHistoriesProp();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
-        public static Article GetWikiArticle(string title)
+        private static List<Article> GetAllWikiArticles()
+        {
+            var dataSet = movieWikiServiceClient.GetAllWikiArticles();
+            var wikiArticles = new List<Article>();
+
+            foreach (DataRow row in dataSet.Tables["WikiArticle"].Rows)
+            {
+                var articleId = Convert.ToInt32(row[(int)WikiArticleTable.ArticleId]);
+                var articleType = Convert.ToString(row[(int)WikiArticleTable.ArticleType]);
+                var title = Convert.ToString(row[(int)WikiArticleTable.Title]);
+                var description = Convert.ToString(row[(int)WikiArticleTable.Description]);
+
+                var article = ArticleFactory.GetInstance(articleType, articleId, title, description);
+                wikiArticles.Add(article);
+            }
+
+            return wikiArticles;
+        }
+
+        public static Article GetWikiArticleByTitle(string title)
         {
             return AllWikiArticles.FirstOrDefault(w => w.Title == title);
+        }
+
+        public static Article GetWikiArticleById(int id)
+        {
+            return AllWikiArticles.FirstOrDefault(w => w.ArticleId == id);
         }
 
         public static bool IsExistingWikiArticle(string title)
@@ -179,23 +186,9 @@ namespace MovieWiki.Custom_Classes
         {
             if (IsExistingUsername(username)) return false;
 
-            int rowsAffected;
-            using (var connection = new SqlConnection())
+            if (movieWikiServiceClient.InsertUserAccount(username, password) == 1)
             {
-                connection.ConnectionString = MovieWikiConnectionString;
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "INSERT INTO UserAccount VALUES(@username, @password);";
-                    command.Parameters.AddWithValue("@username", username);
-                    command.Parameters.AddWithValue("@password", password);
-
-                    connection.Open();
-                    rowsAffected = command.ExecuteNonQuery();
-                }
-            }
-            if (rowsAffected == 1)
-            {
-                UpdateUserAccounts();
+                UpdateUserAccountProp();
                 return true;
             }
             else
@@ -204,40 +197,33 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
-        private static void UpdateUserAccounts()
+        private static void UpdateUserAccountProp()
         {
             AllUserAccounts = GetAllUserAccounts();
         }
 
         private static List<UserAccount> GetAllUserAccounts()
         {
+            var dataSet = movieWikiServiceClient.GetAllUserAccounts();
             var userAccounts = new List<UserAccount>();
-            using (var connection = new SqlConnection())
-            {
-                connection.ConnectionString = MovieWikiConnectionString;
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "SELECT * FROM UserAccount;";
-                    connection.Open();
-                    using (var result = command.ExecuteReader())
-                    {
-                        while (result.Read())
-                        {
-                            var accountId = Convert.ToInt32(result[(int)UserAccountTable.AccountId]);
-                            var username = Convert.ToString(result[(int)UserAccountTable.Username]);
-                            var password = Convert.ToString(result[(int)UserAccountTable.Password]);
 
-                            userAccounts.Add(new UserAccount(accountId, username, password));
-                        }
-                        return userAccounts;
-                    }
-                }
+            foreach (DataRow row in dataSet.Tables["UserAccount"].Rows)
+            {
+                var accountId = Convert.ToInt32(row[(int)UserAccountTable.AccountId]);
+                var username = Convert.ToString(row[(int)UserAccountTable.Username]);
+                var password = Convert.ToString(row[(int)UserAccountTable.Password]);
+
+                userAccounts.Add(new UserAccount(accountId, username, password));
             }
+
+            return userAccounts;
         }
 
         public static UserAccount GetUserAccount(string username, string password)
         {
-            return AllUserAccounts.FirstOrDefault(u => u.Username == username && u.Password == password);
+            return AllUserAccounts.FirstOrDefault(u => 
+                string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase)
+                && u.Password == password);
         }
 
         private static bool IsExistingUsername(string username)
@@ -248,6 +234,29 @@ namespace MovieWiki.Custom_Classes
         public static bool IsUserAdmin(string username)
         {
             return username.ToLower() == "admin";
+        }
+
+        private static List<WikiArticleEditHistory> GetAllWikiArticleEditHistories()
+        {
+            var dataSet = movieWikiServiceClient.GetAllWikiArticleEditHistories();
+            var editHistories = new List<WikiArticleEditHistory>();
+
+            foreach (DataRow row in dataSet.Tables["WikiArticleEditHistory"].Rows)
+            {
+                var editId = Convert.ToInt32(row[(int)WikiArticleEditHistoryTable.EditId]);
+                var articleId = Convert.ToInt32(row[(int)WikiArticleEditHistoryTable.ArticleId]);
+                var accountId = Convert.ToInt32(row[(int)WikiArticleEditHistoryTable.AccountId]);
+                var editTimeStamp = Convert.ToDateTime(row[(int)WikiArticleEditHistoryTable.EditTimestamp]);
+
+                editHistories.Add(new WikiArticleEditHistory(editId, articleId, accountId, editTimeStamp));
+            }
+
+            return editHistories;
+        }
+
+        private static void UpdateWikiArticleEditHistoriesProp()
+        {
+            AllWikiArticleEditHistories = GetAllWikiArticleEditHistories();
         }
     }
 }

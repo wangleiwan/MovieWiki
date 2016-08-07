@@ -2,7 +2,6 @@ USE MovieWiki;
 GO
 
 DROP TABLE WikiArticleEditHistory;
-DROP TABLE ArticleSection;
 DROP TABLE WikiArticle;
 DROP TABLE UserAccount;
 --DROP DATABASE MovieWiki;
@@ -23,31 +22,13 @@ CREATE TABLE UserAccount
 CREATE TABLE WikiArticle
   (
      [ArticleId]   INT IDENTITY(1, 1), 
-     [Author]      INT, 
      [ArticleType] VARCHAR(20) NOT NULL, 
      [Title]       VARCHAR(50) NOT NULL, 
      [Description] TEXT NOT NULL, 
      CONSTRAINT WikiArticle_ArticleId_pk 
 		PRIMARY KEY (ArticleId),
-     CONSTRAINT WikiArticle_Author_fk 
-		FOREIGN KEY (Author) 
-		REFERENCES UserAccount (AccountId),
      CONSTRAINT WikiArticle_Title_uq 
 		UNIQUE (Title)
-  );
-
-CREATE TABLE ArticleSection
-  (
-     [SectionId]   INT IDENTITY(1, 1), 
-     [ArticleId]   INT, 
-     [SectionType] VARCHAR(20) NOT NULL, 
-     [Caption]     VARCHAR(50) NOT NULL, 
-     [Description] TEXT NOT NULL, 
-     CONSTRAINT ArticleSection_SectionId_pk 
-		PRIMARY KEY (SectionId),
-     CONSTRAINT ArticleSection_ArticleId_fk 
-		FOREIGN KEY (ArticleId) 
-		REFERENCES WikiArticle (ArticleId)
   );
 
 CREATE TABLE WikiArticleEditHistory
@@ -65,6 +46,54 @@ CREATE TABLE WikiArticleEditHistory
 		FOREIGN KEY (AccountId)
 		REFERENCES UserAccount (AccountId)
   ); 
+
+INSERT INTO UserAccount
+VALUES ('Admin', '1F40FC92DA241694750979EE6CF582F2D5D7D28E18335DE05ABC54D0560E0F5302860C652BF08D560252AA5E74210546F369FBBBCE8C12CFC7957B2652FE9A'),
+('nick', '1F40FC92DA241694750979EE6CF582F2D5D7D28E18335DE05ABC54D0560E0F5302860C652BF08D560252AA5E74210546F369FBBBCE8C12CFC7957B2652FE9A');
+
+INSERT INTO WikiArticle (ArticleType, Title, [Description])
+VALUES ('CrewMemberArticle', 'Clint Eastwood', 
+'<CrewMemberArticle>
+  <Title>Clint Eastwood</Title>
+  <Name>Clinton "Clint" Eastwood Jr.</Name>
+  <Age>86</Age>
+  <Description>Clinton "Clint" Eastwood Jr. (born May 31, 1930) is an American actor, film director, producer, musician, and political figure.</Description>
+  <RoleSections>
+    <ActorSection>Best known as the Man with No Name in Sergio Leone''s Dollars trilogy of spaghetti Westerns and as antihero cop Harry Callahan in the five Dirty Harry films</ActorSection>
+    <DirectorSection> Mystic River, Letters from Iwo Jima, Changeling, American Sniper </DirectorSection>
+  </RoleSections>
+</CrewMemberArticle>'),
+('MovieArticle', 'The Godfather', 
+'<MovieArticle>
+  <Title>The Godfather</Title>
+  <Theme>Crime</Theme>
+  <Characters>Michael Corleone, Vito Corleone, Peter Clemenza</Characters>
+  <Language>English</Language>
+  <Duration>175mins</Duration>
+  <Description>When the aging head of a famous crime family decides to transfer his position to one of his subalterns, a series of unfortunate events start happening to the family, and a war begins between all the well-known families leading to insolence, deportation, murder and revenge, and ends with the favorable successor being finally chosen.</Description>
+</MovieArticle>'),
+('CharacterArticle', 'Oskar Schindler', 
+'<CharacterArticle>
+  <Title>Oskar Schindler</Title>
+  <Name>Oskar Schindler</Name>
+  <Age>66 (d. 9 October 1974)</Age>
+  <MoviesAppearedIn>Schindler''s List</MoviesAppearedIn>
+  <IsFictional>false</IsFictional>
+  <Description>Oskar Schindler was a German industrialist, spy, and member of the Nazi Party who is credited with saving the lives of 1,200 Jews during the Holocaust by employing them in his enamelware and ammunitions factories, which were located in occupied Poland and the Protectorate of Bohemia and Moravia. He is the subject of the 1982 novel Schindler''s Ark, and the subsequent 1993 film Schindler''s List, which reflected his life as an opportunist initially motivated by profit who came to show extraordinary initiative, tenacity and dedication to save the lives of his Jewish employees.</Description>
+</CharacterArticle>'),
+('PropArticle', 'Lightsaber', 
+'<PropArticle>
+  <Title>Lightsaber</Title>
+  <MoviesFeaturedIn>Star Wars</MoviesFeaturedIn>
+  <Function>Weapon</Function>
+  <Description>A lightsaber is a fictional energy sword featured in the Star Wars universe. A typical lightsaber usually consists of a metal hilt (usually around 11 inches (28 cm) in length) that projects a brightly-lit energy blade (usually around 3 feet (91 cm) in length), The lightsaber is the signature weapon of the Jedi Order and their Sith counterparts, both of whom can use them for close combat, or to deflect blaster bolts. Its distinct appearance was created using rotoscoping for the original films, and digitally for the prequel trilogy, and the sequel trilogy. The lightsaber first appeared in the original 1977 film A New Hope and every Star Wars movie has featured at least one lightsaber duel. In 2008, a survey of approximately 2,000 film fans found it to be the most popular weapon in film history.</Description>
+</PropArticle>');
+
+INSERT INTO WikiArticleEditHistory
+VALUES (1, 1, '2016-08-06 13:45:49.590'),
+(2, 1, '2016-08-06 13:46:00.860'),
+(3, 2, '2016-08-06 13:50:51.947'),
+(4, 2, '2016-08-06 13:52:47.670');
 
 SELECT * FROM WikiArticle;
 SELECT * FROM UserAccount;

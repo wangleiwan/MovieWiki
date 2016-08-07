@@ -3,27 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace MovieWiki.Custom_Classes
 {
     public abstract class PersonArticle : Article
     {
         public string Name { get; set; }
-        public int Age { get; set; }
+        public string Age { get; set; }
 
-        public override List<TableRow> BuildControls(string[] parameters)
+        public override void ParseData(string articleData)
         {
-            var baseRows = base.BuildControls(null);
-            var personRows = new List<TableRow>();
+            base.ParseData(articleData);
+            var xml = XElement.Parse(articleData);
+            Name = xml.Elements("Name").FirstOrDefault().Value;
+            Age = xml.Elements("Age").FirstOrDefault().Value;
+        }
 
-            var name = WebControlBuilder.BuildLabelTextBoxPair("lblName", "Full name", "Name");
-            personRows.Add(WebControlBuilder.BuildTableRow(name.Item1, name.Item2));
-            var age = WebControlBuilder.BuildLabelTextBoxPair("lblAge", "Age", "Age");
-            personRows.Add(WebControlBuilder.BuildTableRow(age.Item1, age.Item2));
+        public override List<Panel> BuildControls()
+        {
+            var basePanels = base.BuildControls();
+            var personPanels = new List<Panel>();
 
-            baseRows.InsertRange(1, personRows);
+            var name = WebControlBuilder.BuildLabelTextBoxPair("lblName", "Full name", "Name", Name);
+            personPanels.Add(WebControlBuilder.BuildPanel(name.Item1, name.Item2));
+            var age = WebControlBuilder.BuildLabelTextBoxPair("lblAge", "Age", "Age", Age);
+            personPanels.Add(WebControlBuilder.BuildPanel(age.Item1, age.Item2));
 
-            return baseRows;
+            basePanels.InsertRange(1, personPanels);
+
+            return basePanels;
         }
     }
 }
