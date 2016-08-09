@@ -39,7 +39,7 @@ namespace MovieWiki.Web_Forms
             Response.Redirect("Default.aspx");
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
+        protected void btnSignIn_ServerClick(object sender, EventArgs e)
         {
 
             Response.Redirect("Login.aspx");

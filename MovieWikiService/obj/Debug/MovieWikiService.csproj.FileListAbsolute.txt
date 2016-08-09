@@ -19,3 +19,9 @@ F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWikiService\bin\M
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWikiService\obj\Debug\MovieWikiService.csprojResolveAssemblyReference.cache
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWikiService\obj\Debug\MovieWikiService.dll
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWiki\MovieWikiService\obj\Debug\MovieWikiService.pdb
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWikiService\bin\MovieWikiService.dll.config
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWikiService\bin\MovieWikiService.dll
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWikiService\bin\MovieWikiService.pdb
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWikiService\obj\Debug\MovieWikiService.csprojResolveAssemblyReference.cache
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWikiService\obj\Debug\MovieWikiService.dll
+F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWikiService\obj\Debug\MovieWikiService.pdb

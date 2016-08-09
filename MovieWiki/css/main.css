@@ -1,4 +1,12 @@
-﻿.content {
+﻿.contentLogin {
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;

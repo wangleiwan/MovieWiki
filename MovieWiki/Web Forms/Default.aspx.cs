@@ -36,5 +36,10 @@ namespace MovieWiki.Web_Forms
             Session[Global.ActiveUserAccount] = null;
             Response.Redirect("Default.aspx");
         }
+
+        protected void btnSearchArticle_ServerClick(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", "ShowPopup();", true);
+        }
     }
 }

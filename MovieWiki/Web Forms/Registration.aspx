@@ -41,7 +41,7 @@
                                 <div class="input-group">
                                 <input id="searchInput" type="text" class="form-control" placeholder="Search for..."/>
                                 <span class="input-group-btn">
-                                    <button runat="server" id="btnSearchbtn" class="btn btn-default" type="button" onserverclick="btnSearch_Click">
+                                    <button runat="server" id="btnSearchbtn" class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -49,7 +49,7 @@
                         </div>
                   </div>
               </div>
-              <button type="button" class="btn btn-default navbar-btn navbar-right">Sign in</button>
+              <button runat="server" id="btnSignIn" type="button" class="btn btn-default navbar-btn navbar-right" CausesValidation="False" onserverclick="btnSignIn_ServerClick">Sign in</button>
             </div><!-- /.navbar-collapse -->
             </div>
         </nav>
