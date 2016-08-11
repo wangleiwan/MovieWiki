@@ -31,7 +31,7 @@ namespace MovieWiki.Custom_Classes
             panels.Add(WebControlBuilder.BuildPanel(title.Item1, title.Item2));
 
             var description = WebControlBuilder.BuildLabelTextBoxPair("lblDescription", "Description", "Description",
-                Description, TextBoxMode.MultiLine, 40, 20);
+                Description, TextBoxMode.MultiLine, 40, 10);
             panels.Add(WebControlBuilder.BuildPanel(description.Item1, description.Item2));
 
             return panels;

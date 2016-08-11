@@ -81,5 +81,27 @@ namespace MovieWiki.Web_Forms
                 lblError.Text = "An article with that title already exists";
             }
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session[Global.ActiveUserAccount] = null;
+            Response.Redirect("Default.aspx");
+        }
+
+        protected void btnsearchbtn_Click(object sender, EventArgs e)
+        {
+            var searchResultUrl = MovieWikiDbHelper.GetWikiArticleUrlBySearch(searchInput.Text);
+            if (searchResultUrl != null)
+            {
+                Response.Redirect(searchResultUrl);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+                upModal.Update();
+            }
+
+
+        }
     }
 }

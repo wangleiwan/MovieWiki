@@ -19,11 +19,11 @@ namespace MovieWiki.Custom_Classes
         {
             var label = new Label();
             label.Text = labelText;
-            label.CssClass = "col-sm-2 control-label";
+            label.CssClass = "col-sm-3 control-label";
             label.ID = labelId;
 
             Panel panel = new Panel();
-            panel.CssClass = "col-sm-10";
+            panel.CssClass = "col-sm-9";
             
             var textBox = new TextBox();
             textBox.ID = textBoxId;

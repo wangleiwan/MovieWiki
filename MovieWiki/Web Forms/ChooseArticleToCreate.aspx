@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#">
+                  <a class="navbar-brand" href="Default.aspx">
                       <img id="brandIcon" alt="Brand" src="../images/movie-icon.png"/>
                   </a>
                 </div>                
@@ -53,6 +53,12 @@
                 </div><!-- /.navbar-collapse -->
              </div>
           </nav>
+          <nav aria-label="back">
+            <ul class="pager">
+              <li class="previous"><a href="Default.aspx"><span aria-hidden="true">&larr;</span> Back</a></li>
+              <li class="next disabled"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+            </ul>
+          </nav>
       </div>
       <div class="modalSection">
         <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
@@ -70,32 +76,64 @@
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
       </div>
-
-    <div>
-        <a href="Default.aspx"><-- Back</a><br />
-        <br />
-        <h3>Create a MovieWiki article template</h3>
-        <h4>What type of article would you like to create?</h4>
-        <asp:CustomValidator runat="server"
-                        ID="vldArticle"
-                        ValidationGroup="vldArticles"
-                        OnServerValidate="vldArticle_ServerValidate"
-                        ForeColor="Red" /><br />
-        <asp:RadioButton ID="rbMovieArticle" ValidationGroup="vldArticles" GroupName="rbArticles" Text="Movie" OnCheckedChanged="rbMovieArticle_CheckedChanged" AutoPostBack="true" runat="server" /><br />
-        <asp:RadioButton ID="rbPersonArticle" ValidationGroup="vldArticles" GroupName="rbArticles" Text="Person" OnCheckedChanged="rbPersonArticle_CheckedChanged" AutoPostBack="true" runat="server" /><br />
-        <div id="personArticleTypes" runat="server" style="margin-left: 30px">
-            <asp:RadioButton ID="rbPersonCrewMemberArticle" ValidationGroup="vldArticles" GroupName="rbPersonArticles" Text="Crew member" OnCheckedChanged="rbPersonCrewMemberArticle_CheckedChanged" AutoPostBack="true" runat="server" /><br />
-            <div id="personCrewMemberRoles" runat="server" style="margin-left: 60px">
-                <asp:CheckBox ID="chbActor" ValidationGroup="vldArticles" Text="Actor" runat="server" /><br />
-                <asp:CheckBox ID="chbDirector" ValidationGroup="vldArticles" Text="Director" runat="server" /><br />
-                <asp:CheckBox ID="chbProducer" ValidationGroup="vldArticles" Text="Producer" runat="server" /><br />
+      <div class="row text-center">
+          <h2>Create a MovieWiki article template</h2>
+      </div>
+        <div class="container">
+            <div id="chooseTemplate" class="panel panel-info">
+              <div class="panel-body">
+                <div id="chooseTitle" class="row">
+                    <h3>Please choose the type of article you want to create</h3>
+                </div>
+                <div>
+                    <div class="row text-center">
+                        <asp:CustomValidator runat="server"
+                            ID="vldArticle"
+                            ValidationGroup="vldArticles"
+                            OnServerValidate="vldArticle_ServerValidate"
+                            ForeColor="Red" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-6">
+                            <asp:RadioButton CssClass="createRadioBtn" Font-Size="13pt" ID="rbMovieArticle" ValidationGroup="vldArticles" GroupName="rbArticles" Text="Movie" OnCheckedChanged="rbMovieArticle_CheckedChanged" AutoPostBack="true" runat="server" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-6">
+                            <asp:RadioButton CssClass="createRadioBtn" Font-Size="13pt" ID="rbPersonArticle" ValidationGroup="vldArticles" GroupName="rbArticles" Text="Person" OnCheckedChanged="rbPersonArticle_CheckedChanged" AutoPostBack="true" runat="server" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-9">
+                            <div id="personArticleTypes" runat="server" style="margin-left: 30px">
+                                <asp:RadioButton CssClass="createRadioBtn" Font-Size="13pt" ID="rbPersonCrewMemberArticle" ValidationGroup="vldArticles" GroupName="rbPersonArticles" Text="Crew member" OnCheckedChanged="rbPersonCrewMemberArticle_CheckedChanged" AutoPostBack="true" runat="server" />
+                                <div id="personCrewMemberRoles" runat="server" style="margin-left: 60px">
+                                    <asp:CheckBox CssClass="createRadioBtn" Font-Size="13pt" ID="chbActor" ValidationGroup="vldArticles" Text="Actor" runat="server" /><br />
+                                    <asp:CheckBox CssClass="createRadioBtn" Font-Size="13pt" ID="chbDirector" ValidationGroup="vldArticles" Text="Director" runat="server" /><br />
+                                    <asp:CheckBox CssClass="createRadioBtn" Font-Size="13pt" ID="chbProducer" ValidationGroup="vldArticles" Text="Producer" runat="server" /><br />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <asp:RadioButton CssClass="createRadioBtn" Font-Size="13pt" ID="rbPersonCharacterArticle" ValidationGroup="vldArticles" GroupName="rbPersonArticles" Text="Movie character" OnCheckedChanged="rbPersonCharacterArticle_CheckedChanged" AutoPostBack="true" runat="server" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-6">
+                            <asp:RadioButton CssClass="createRadioBtn" Font-Size="13pt" ID="rbPropArticle" ValidationGroup="vldArticles" GroupName="rbArticles" Text="Prop" OnCheckedChanged="rbPropArticle_CheckedChanged" AutoPostBack="true" runat="server" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-6">
+                            <asp:Button CssClass="btn btn-default" ID="btnCreateTemplate" ValidationGroup="vldArticles" runat="server" Text="Create article template" OnClick="btnCreateTemplate_Click" />
+                        </div>
+                   </div>
+                 </div>
+              </div>
             </div>
-            <asp:RadioButton ID="rbPersonCharacterArticle" ValidationGroup="vldArticles" GroupName="rbPersonArticles" Text="Movie character" OnCheckedChanged="rbPersonCharacterArticle_CheckedChanged" AutoPostBack="true" runat="server" /><br />
-        </div>
-        <asp:RadioButton ID="rbPropArticle" ValidationGroup="vldArticles" GroupName="rbArticles" Text="Prop" OnCheckedChanged="rbPropArticle_CheckedChanged" AutoPostBack="true" runat="server" /><br />
-        <br />
-        <asp:Button ID="btnCreateTemplate" ValidationGroup="vldArticles" runat="server" Text="Create article template" OnClick="btnCreateTemplate_Click" />
-    </div>
+       </div>
     </form>
 </body>
 </html>

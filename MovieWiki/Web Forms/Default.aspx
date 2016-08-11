@@ -58,12 +58,52 @@
       <div class="modalSection">
         <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
           <div class="modal-dialog" role="document">
-            <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+            <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title text-center">No Result Found</h4>
+                      </div>
+                    </div><!-- /.modal-content -->
+               </ContentTemplate>
+            </asp:UpdatePanel>
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <%-- Account Info Modal --%>
+        <div class="modal fade" tabindex="-1" role="dialog" id="AccountModal">
+          <div class="modal-dialog" role="document">
+            <asp:UpdatePanel ID="updateAccount" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title text-center"><asp:Label ID="lblGreeting" runat="server" /></h2>
+                      </div>
+                      <div class="modal-body">
+                          <asp:Label ID="lblArticleEdits" runat="server" Text="Your article contributions:"></asp:Label>
+                          <asp:Panel id="pUserEdits" runat="server">
+
+                          </asp:Panel>
+                      </div>
+                    </div><!-- /.modal-content -->
+               </ContentTemplate>
+            </asp:UpdatePanel>
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+      </div>
+      <%-- Account Info Modal --%>
+        <div class="modal fade" tabindex="-1" role="dialog" id="RecentModal">
+          <div class="modal-dialog" role="document">
+            <asp:UpdatePanel ID="upRecentModal" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title text-center"><asp:Label ID="lblRecentEdits" runat="server"/></h2>
+                      </div>
+                      <div class="modal-body">
+                          <asp:Panel id="pUserEditsRecent" runat="server"></asp:Panel>
                       </div>
                     </div><!-- /.modal-content -->
                </ContentTemplate>
@@ -76,11 +116,6 @@
         <div id="welcomeTitle" class="row text-center">
             <h1><asp:Label ID="lblWelcome" runat="server"></asp:Label></h1>
         </div>
-        
-        <%--
-        <a href="ChooseArticleToCreate.aspx">Create an article</a><br />
-        <a href="ShowAccountInformation.aspx">Account information</a><br />
-        <a href="ShowRecentArticles.aspx">Recent articles</a><br />--%>
 
         <div id="sliderSection" class="container">
             <div id="slideShow" class="carousel slide" data-ride="carousel">
@@ -93,15 +128,13 @@
 
               <!-- Wrapper for slides -->
               <div id="sliderInner" class="carousel-inner" role="listbox">
-                <div class="item active">
-                  <img class="slideImg" src="../images/Avatar.jpeg" width="600" />
-                </div>
-                <div class="item">
-                  <img class="slideImg" src="../images/starWars.jpg" width="600" />
-                </div>
-                <div class="item">
-                  <img class="slideImg" src="../images/themartian.jpg" width="600" />
-                </div>
+
+                  <a class="item active" href="Registration.aspx"><img class="slideImg" src="../images/Avatar.jpeg" width="600" /></a>
+                
+                  <a class="item" href="Registration.aspx"><img class="slideImg" src="../images/starWars.jpg" width="600" /></a>
+               
+                  <a class="item" href="Registration.aspx"><img class="slideImg" src="../images/themartian.jpg" width="600" /></a>
+               
               </div>
 
               <!-- Controls -->
@@ -117,8 +150,8 @@
        
             <div id="optionSection" class="row">
                 <div class="col-md-4 text-center">
-                    <button class="btn btn-default btn-lg">
-                        <a href="ShowAccountInformation.aspx">Account information</a>
+                    <button runat="server" id="showAccountInfo" data-toggle="modal" class="btn btn-default btn-lg" onserverclick="showAccountInfo_ServerClick">
+                        Account information
                     </button>
                 </div>
                 <div class="col-md-4 text-center">
@@ -127,8 +160,8 @@
                     </button>
                 </div>
                 <div class="col-md-4 text-center">
-                    <button class="btn btn-default btn-lg">
-                        <a href="ShowRecentArticles.aspx">Recent articles</a>
+                    <button runat="server" data-toggle="modal" id="showRecentModal" class="btn btn-default btn-lg" onserverclick="showRecentModal_ServerClick">
+                        Recent articles
                     </button>
                 </div>
             </div>

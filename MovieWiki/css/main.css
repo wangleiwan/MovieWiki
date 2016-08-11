@@ -69,4 +69,31 @@ input#searchInput.form-control {
     margin-bottom: 20px;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
+#chooseTemplate {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#chooseTitle {
+    margin-left: 20px;
+}
+
+.createArticleSection {
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom: 20px;
+}
+
+button#showAccountInfo, button#showRecentModal {
+    color: #337ab7;
+}
+
+.createRadioBtn label{
+    margin-left: 10px;
+}
 

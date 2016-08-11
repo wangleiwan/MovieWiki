@@ -109,10 +109,7 @@
     <Content Include="Web Forms\Login.aspx" />
     <Content Include="SQL\MovieWiki.sql" />
     <Content Include="Web Forms\Registration.aspx" />
-    <Content Include="Web Forms\SearchArticle.aspx" />
-    <Content Include="Web Forms\ShowAccountInformation.aspx" />
     <Content Include="Web Forms\ShowArticle.aspx" />
-    <Content Include="Web Forms\ShowRecentArticles.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -179,33 +176,12 @@
     <Compile Include="Web Forms\Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Web Forms\SearchArticle.aspx.cs">
-      <DependentUpon>SearchArticle.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Web Forms\SearchArticle.aspx.designer.cs">
-      <DependentUpon>SearchArticle.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Web Forms\ShowAccountInformation.aspx.cs">
-      <DependentUpon>ShowAccountInformation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Web Forms\ShowAccountInformation.aspx.designer.cs">
-      <DependentUpon>ShowAccountInformation.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Web Forms\ShowArticle.aspx.cs">
       <DependentUpon>ShowArticle.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web Forms\ShowArticle.aspx.designer.cs">
       <DependentUpon>ShowArticle.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Web Forms\ShowRecentArticles.aspx.cs">
-      <DependentUpon>ShowRecentArticles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Web Forms\ShowRecentArticles.aspx.designer.cs">
-      <DependentUpon>ShowRecentArticles.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
