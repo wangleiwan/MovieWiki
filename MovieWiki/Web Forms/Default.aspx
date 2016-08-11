@@ -13,7 +13,9 @@
     <title>Welcome To Movie Wiki</title>
 </head>
 <body>
+    
     <form id="form1" runat="server">
+      <asp:ScriptManager runat="server" />
       <div class="container">
         <nav class="navbar navbar-default">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -28,7 +30,7 @@
                   <a class="navbar-brand" href="#">
                       <img id="brandIcon" alt="Brand" src="../images/movie-icon.png"/>
                   </a>
-                </div>
+                </div>                
             <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <div class="navbar-form navbar-left">
@@ -38,9 +40,9 @@
                           </div>
                           <div class="col-lg-9">
                              <div class="input-group">
-                                <input id="searchInput" type="text" class="form-control" placeholder="Search for an article..."/>
+                                <asp:TextBox runat="server" ID="searchInput" CssClass="form-control" placeholder="Search for an article..."/>
                                 <span class="input-group-btn">
-                                  <button runat="server" id="btnSearchbtn" class="btn btn-default" type="button">
+                                  <button runat="server" id="btnsearchbtn" data-toggle="modal" class="btn btn-default" onserverclick="btnsearchbtn_Click">
                                       <i class="fa fa-search"></i>
                                   </button>
                                 </span>
@@ -56,24 +58,81 @@
       <div class="modalSection">
         <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
           <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onserverclick="btnSearchArticle_ServerClick"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title text-center">No Result Found</h4>
-              </div>
-            </div><!-- /.modal-content -->
+            <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title text-center">No Result Found</h4>
+                      </div>
+                    </div><!-- /.modal-content -->
+               </ContentTemplate>
+            </asp:UpdatePanel>
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
       </div>
 
     <div>
-        <asp:Label ID="lblWelcome" runat="server"></asp:Label><br />
-        <%--<asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" /><br />--%>
-        <br />
+        <div id="welcomeTitle" class="row text-center">
+            <h1><asp:Label ID="lblWelcome" runat="server"></asp:Label></h1>
+        </div>
+        
+        <%--
         <a href="ChooseArticleToCreate.aspx">Create an article</a><br />
-        <a href="SearchArticle.aspx">Search for an article</a><br />
         <a href="ShowAccountInformation.aspx">Account information</a><br />
-        <a href="ShowRecentArticles.aspx">Recent articles</a><br />
+        <a href="ShowRecentArticles.aspx">Recent articles</a><br />--%>
+
+        <div id="sliderSection" class="container">
+            <div id="slideShow" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <li data-target="#slideShow" data-slide-to="0" class="active"></li>
+                <li data-target="#slideShow" data-slide-to="1"></li>
+                <li data-target="#slideShow" data-slide-to="2"></li>
+              </ol>
+
+              <!-- Wrapper for slides -->
+              <div id="sliderInner" class="carousel-inner" role="listbox">
+                <div class="item active">
+                  <img class="slideImg" src="../images/Avatar.jpeg" width="600" />
+                </div>
+                <div class="item">
+                  <img class="slideImg" src="../images/starWars.jpg" width="600" />
+                </div>
+                <div class="item">
+                  <img class="slideImg" src="../images/themartian.jpg" width="600" />
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <a class="left carousel-control" href="#slideShow" role="button" data-slide="prev">
+                  <span class="icon-prev" aria-hidden="true"></span>
+                  <span class="sr-only"><i class="fa fa-angle-left"></i></span>
+              </a>
+              <a class="right carousel-control" href="#slideShow" role="button" data-slide="next">
+                <span class="icon-next" aria-hidden="true"></span>
+                <span class="sr-only"><i class="fa fa-angle-right"></i></span>
+              </a>
+            </div>
+       
+            <div id="optionSection" class="row">
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-default btn-lg">
+                        <a href="ShowAccountInformation.aspx">Account information</a>
+                    </button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-default btn-lg">
+                        <a href="ChooseArticleToCreate.aspx">Create an article</a>
+                    </button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-default btn-lg">
+                        <a href="ShowRecentArticles.aspx">Recent articles</a>
+                    </button>
+                </div>
+            </div>
+         </div>
     </div>
     </form>
 </body>

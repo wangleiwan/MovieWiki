@@ -169,8 +169,19 @@ namespace MovieWiki.Custom_Classes
 
         public static Article GetWikiArticleByTitle(string title)
         {
-            return AllWikiArticles.FirstOrDefault(w => w.Title == title);
+            return AllWikiArticles.FirstOrDefault(w => string.Equals(w.Title, title, StringComparison.OrdinalIgnoreCase));
+            //return AllWikiArticles.FirstOrDefault(w => w.Title == title);
         }
+
+        public static string GetWikiArticleUrlBySearch(string search)
+        {
+            var matchingArticle = GetWikiArticleByTitle(search);
+
+            return matchingArticle != null
+                ? string.Format(Global.ShowArticleUrlWithId, matchingArticle.ArticleId)
+                : null;
+        }
+
 
         public static Article GetWikiArticleById(int id)
         {

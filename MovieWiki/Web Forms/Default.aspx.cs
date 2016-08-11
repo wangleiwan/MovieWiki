@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 using MovieWiki.Custom_Classes;
 
 namespace MovieWiki.Web_Forms
@@ -14,6 +15,7 @@ namespace MovieWiki.Web_Forms
             if (!IsPostBack)
             {
                 PromptLogin();
+                
             }
         }
 
@@ -39,7 +41,23 @@ namespace MovieWiki.Web_Forms
 
         protected void btnSearchArticle_ServerClick(object sender, EventArgs e)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "ShowPopup();", true);
+            //ClientScript.RegisterStartupScript(this.GetType(), "alert", "myfunction();", true);
+        }
+
+        protected void btnsearchbtn_Click(object sender, EventArgs e)
+        {
+            var searchResultUrl = MovieWikiDbHelper.GetWikiArticleUrlBySearch(searchInput.Text);
+            if (searchResultUrl != null)
+            {
+                Response.Redirect(searchResultUrl);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+                upModal.Update();
+            }
+            
+            
         }
     }
 }

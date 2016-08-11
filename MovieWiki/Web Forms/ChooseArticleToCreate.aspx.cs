@@ -24,6 +24,28 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session[Global.ActiveUserAccount] = null;
+            Response.Redirect("Default.aspx");
+        }
+
+        protected void btnsearchbtn_Click(object sender, EventArgs e)
+        {
+            var searchResultUrl = MovieWikiDbHelper.GetWikiArticleUrlBySearch(searchInput.Text);
+            if (searchResultUrl != null)
+            {
+                Response.Redirect(searchResultUrl);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+                upModal.Update();
+            }
+
+
+        }
+
         protected void rbPersonArticle_CheckedChanged(object sender, EventArgs e)
         {
             personArticleTypes.Visible = true;

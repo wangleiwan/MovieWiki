@@ -6,7 +6,7 @@
 }
 
 .content {
-    height: 80vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,5 +43,30 @@ input#searchInput.form-control {
     width: 450px;
 }
 
+.carousel-inner > .item > img {
+    margin: 1px auto;
+}
+
+
+#sliderSection {
+    width: 770px;
+    height: auto;
+}
+
+#slideShow {
+    margin-bottom: 50px;
+}
+
+.carousel-control {
+    opacity: 0.3;
+}
+
+.slideImg {
+    object-fit: cover;
+}
+
+#welcomeTitle {
+    margin-bottom: 20px;
+}
 
 

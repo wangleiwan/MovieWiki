@@ -64,7 +64,10 @@
     <Content Include="css\font-awesome.css" />
     <Content Include="css\main.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="images\Avatar.jpeg" />
     <Content Include="images\movie-icon.png" />
+    <Content Include="images\starWars.jpg" />
+    <Content Include="images\themartian.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.js" />
