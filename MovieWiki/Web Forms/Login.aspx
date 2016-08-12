@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="MovieWiki.Web_Forms.Login" %>
+﻿<!--Contributors: Lei Wang -->
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="MovieWiki.Web_Forms.Login" %>
 
 <!DOCTYPE html>
 

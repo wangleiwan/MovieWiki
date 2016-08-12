@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="MovieWiki.Web_Forms.Registration" %>
+﻿<!--Contributors: Lei Wang -->
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="MovieWiki.Web_Forms.Registration" %>
 
 <!DOCTYPE html>
 
@@ -14,46 +16,6 @@
 <body>
     <form runat="server">
     <div class="container">
-        <nav class="navbar navbar-default">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="container-fluid">
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="Default.aspx">
-                      <img id="brandIcon" alt="Brand" src="../images/movie-icon.png"/>
-                  </a>
-              
-                </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <div class="navbar-form navbar-left">
-                  <div class="row titleSearch">
-                      <div class="col-lg-3">
-                        <div class="title">Movie Wiki</div>
-                      </div>
-                        <div class="col-lg-9">
-                                <div class="input-group">
-                                <input id="searchInput" type="text" class="form-control" placeholder="Search for..."/>
-                                <span class="input-group-btn">
-                                    <button runat="server" id="btnSearchbtn" class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                  </div>
-              </div>
-              <button runat="server" id="btnSignIn" type="button" class="btn btn-default navbar-btn navbar-right" CausesValidation="False" onserverclick="btnSignIn_ServerClick">Sign in</button>
-            </div><!-- /.navbar-collapse -->
-            </div>
-        </nav>
-
         <div class="content">
             <div class="logInSection">
               <div class="panel panel-info">

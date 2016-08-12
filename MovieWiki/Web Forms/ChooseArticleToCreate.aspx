@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChooseArticleToCreate.aspx.cs" Inherits="MovieWiki.Web_Forms.ChooseArticleToCreate" %>
+﻿<!--Contributors: Lei Wang -->
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChooseArticleToCreate.aspx.cs" Inherits="MovieWiki.Web_Forms.ChooseArticleToCreate" %>
 
 <!DOCTYPE html>
 

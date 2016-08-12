@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="MovieWiki.Web_Forms.Default" %>
+﻿<!--Contributors: Lei Wang -->
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="MovieWiki.Web_Forms.Default" %>
 
 <!DOCTYPE html>
 
@@ -17,6 +19,7 @@
     <form id="form1" runat="server">
       <asp:ScriptManager runat="server" />
       <div class="container">
+        <!-- navbar section -->
         <nav class="navbar navbar-default">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="container-fluid">
@@ -55,7 +58,7 @@
              </div>
           </nav>
       </div>
-      <div class="modalSection">
+      <div class="modalSection"><!-- search modal section -->
         <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
           <div class="modal-dialog" role="document">
             <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
@@ -70,7 +73,7 @@
             </asp:UpdatePanel>
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        <%-- Account Info Modal --%>
+        <%-- Account Info Modal section --%>
         <div class="modal fade" tabindex="-1" role="dialog" id="AccountModal">
           <div class="modal-dialog" role="document">
             <asp:UpdatePanel ID="updateAccount" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
@@ -82,9 +85,7 @@
                       </div>
                       <div class="modal-body">
                           <asp:Label ID="lblArticleEdits" runat="server" Text="Your article contributions:"></asp:Label>
-                          <asp:Panel id="pUserEdits" runat="server">
-
-                          </asp:Panel>
+                          <asp:Panel id="pUserEdits" runat="server"></asp:Panel>
                       </div>
                     </div><!-- /.modal-content -->
                </ContentTemplate>
@@ -92,7 +93,7 @@
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
       </div>
-      <%-- Account Info Modal --%>
+      <%-- Recent Articles Modal section --%>
         <div class="modal fade" tabindex="-1" role="dialog" id="RecentModal">
           <div class="modal-dialog" role="document">
             <asp:UpdatePanel ID="upRecentModal" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
@@ -116,7 +117,7 @@
         <div id="welcomeTitle" class="row text-center">
             <h1><asp:Label ID="lblWelcome" runat="server"></asp:Label></h1>
         </div>
-
+        <!-- Images slider section -->
         <div id="sliderSection" class="container">
             <div id="slideShow" class="carousel slide" data-ride="carousel">
               <!-- Indicators -->
@@ -128,13 +129,9 @@
 
               <!-- Wrapper for slides -->
               <div id="sliderInner" class="carousel-inner" role="listbox">
-
-                  <a class="item active" href="Registration.aspx"><img class="slideImg" src="../images/Avatar.jpeg" width="600" /></a>
-                
-                  <a class="item" href="Registration.aspx"><img class="slideImg" src="../images/starWars.jpg" width="600" /></a>
-               
-                  <a class="item" href="Registration.aspx"><img class="slideImg" src="../images/themartian.jpg" width="600" /></a>
-               
+                  <a class="item active" href="ShowArticle.aspx?id=5"><img class="slideImg" src="../images/Avatar.jpeg" width="600" /></a>
+                  <a class="item" href="ShowArticle.aspx?id=6"><img class="slideImg" src="../images/starWars.jpg" width="600" /></a>
+                  <a class="item" href="ShowArticle.aspx?id=7"><img class="slideImg" src="../images/themartian.jpg" width="600" /></a>
               </div>
 
               <!-- Controls -->
@@ -147,7 +144,7 @@
                 <span class="sr-only"><i class="fa fa-angle-right"></i></span>
               </a>
             </div>
-       
+            <!-- option buttons section -->
             <div id="optionSection" class="row">
                 <div class="col-md-4 text-center">
                     <button runat="server" id="showAccountInfo" data-toggle="modal" class="btn btn-default btn-lg" onserverclick="showAccountInfo_ServerClick">

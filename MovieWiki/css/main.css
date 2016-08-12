@@ -1,4 +1,6 @@
-﻿.contentLogin {
+﻿/*Contributors: Lei Wang*/
+
+.contentLogin {
     height:100vh;
     display: flex;
     justify-content: center;
@@ -45,6 +47,7 @@ input#searchInput.form-control {
 
 .carousel-inner > .item > img {
     margin: 1px auto;
+    opacity: 0.8;
 }
 
 

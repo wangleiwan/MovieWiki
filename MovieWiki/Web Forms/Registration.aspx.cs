@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Contributors: Lei Wang
+
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;

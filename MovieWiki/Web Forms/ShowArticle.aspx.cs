@@ -1,4 +1,6 @@
-﻿using MovieWiki.Custom_Classes;
+﻿//Contributors: Lei Wang
+
+using MovieWiki.Custom_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

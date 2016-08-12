@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Contributors: Lei Wang
+
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,7 +15,6 @@ namespace MovieWiki.Web_Forms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             if (!IsPostBack)
             {
                 PromptLogin();
@@ -67,18 +68,11 @@ namespace MovieWiki.Web_Forms
             Response.Redirect("Default.aspx");
         }
 
-        protected void btnSearchArticle_ServerClick(object sender, EventArgs e)
-        {
-            //ClientScript.RegisterStartupScript(this.GetType(), "alert", "myfunction();", true);
-        }
-
         protected void btnsearchbtn_Click(object sender, EventArgs e)
         {
             var searchResultUrl = MovieWikiDbHelper.GetWikiArticleUrlBySearch(searchInput.Text);
             if (searchResultUrl != null)
-            {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "alert('hi');", true);
-                
+            {              
                 Response.Redirect(searchResultUrl);
             }
             else

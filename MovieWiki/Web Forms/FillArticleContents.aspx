@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FillArticleContents.aspx.cs" Inherits="MovieWiki.Web_Forms.FillArticleContents" %>
+﻿<!--Contributors: Lei Wang -->
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FillArticleContents.aspx.cs" Inherits="MovieWiki.Web_Forms.FillArticleContents" %>
 
 <!DOCTYPE html>
 

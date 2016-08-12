@@ -101,7 +101,7 @@ VALUES ('CrewMemberArticle', 'Clint Eastwood',
 '<MovieArticle>
   <Title>Star Wars: The Force Awakens</Title>
   <Theme>Sci Fi</Theme>
-  <Characters>Rey, Kylo Ren, Flinn, Han Solo, Luke Skywalker, Princess Leia, R2D2, General Hux, Supreme Leader Snoke</Characters>
+  <Characters>Rey, Kylo Ren, Flinn ,Han Solo, Luke Skywalker, Princess Leia, R2D2, General Hux, Sumpreme Leader Snoke</Characters>
   <Language>English</Language>
   <Duration>138mins</Duration>
   <Description>30 years after the defeat of Darth Vader and the Empire, Rey, a scavenger from the planet Jakku, finds a BB-8 droid that knows the whereabouts of the long lost Luke Skywalker. Rey, as well as a rogue stormtrooper and two smugglers, are thrown into the middle of a battle between the Resistance and the daunting legions of the First Order.</Description>

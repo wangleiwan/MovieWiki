@@ -27,3 +27,9 @@ F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWiki\bin\M
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWiki\obj\Debug\MovieWiki.csprojResolveAssemblyReference.cache
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWiki\obj\Debug\MovieWiki.dll
 F:\SHERIDAN COLLEGE\semester4\.NET & C#\project\MovieWikiProject\MovieWiki\obj\Debug\MovieWiki.pdb
+C:\Users\Nick\Desktop\MovieWiki\MovieWiki\bin\MovieWiki.dll.config
+C:\Users\Nick\Desktop\MovieWiki\MovieWiki\bin\MovieWiki.dll
+C:\Users\Nick\Desktop\MovieWiki\MovieWiki\bin\MovieWiki.pdb
+C:\Users\Nick\Desktop\MovieWiki\MovieWiki\obj\Debug\MovieWiki.csprojResolveAssemblyReference.cache
+C:\Users\Nick\Desktop\MovieWiki\MovieWiki\obj\Debug\MovieWiki.dll
+C:\Users\Nick\Desktop\MovieWiki\MovieWiki\obj\Debug\MovieWiki.pdb
