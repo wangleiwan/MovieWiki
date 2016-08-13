@@ -1,4 +1,4 @@
-﻿//Contributors: Lei Wang
+﻿//Contributors: Lei Wang, Noe Ascencio, Nick Rose
 
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,10 @@ using System.Web.UI.WebControls;
 
 namespace MovieWiki.Custom_Classes
 {
+    //A helper class for building frequently used web controls
     public static class WebControlBuilder
     {
-        // Noe
-        // Changed from tablerows all changed panel
-        // Textbox is in panel can be changed to just texbox but needs to have panel at some place
-        // for how peter expects it to work
+        // Returns a Label and Panel within a Tuple. We used a Tuple because Labels and Panels are always paired
         public static Tuple<Label, Panel> BuildLabelTextBoxPair(string labelId, string labelText, string textBoxId,
             string textBoxContent = null, TextBoxMode txtBoxMode = TextBoxMode.SingleLine, int colSpan = 25, int rowSpan = 1)
         {
@@ -39,6 +37,7 @@ namespace MovieWiki.Custom_Classes
             return new Tuple<Label, Panel>(label, panel);
         }
 
+        // Builds a Label and Checkbox
         public static Tuple<Label, CheckBox> BuildLabelCheckBoxPair(string labelId, string labelText, 
             string checkBoxId, bool isChecked = false)
         {
@@ -51,6 +50,7 @@ namespace MovieWiki.Custom_Classes
             return new Tuple<Label, CheckBox>(label, checkBox);
         }
 
+        // Builds a Panel with any number of Controls within it (e.g. Labels, other Panels)
         public static Panel BuildPanel(params Control[] controls)
         {
             var panel = new Panel();
@@ -62,6 +62,7 @@ namespace MovieWiki.Custom_Classes
             return panel;
         }
 
+        // Builds a HyperLink web control
         public static HyperLink BuildHyperLink(string text, string url)
         {
             var hyperLink = new HyperLink();
@@ -70,6 +71,7 @@ namespace MovieWiki.Custom_Classes
             return hyperLink;
         }
 
+        // Builds a Validator web control
         public static RequiredFieldValidator BuildReqFieldValidator(string ctrlToVldate, string Id, string errorMsg)
         {
             return new RequiredFieldValidator

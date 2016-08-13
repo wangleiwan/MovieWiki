@@ -31,6 +31,10 @@
     padding: 6px;
 }
 
+#form1 {
+    overflow-x: hidden;
+}
+
 .title {
     display: inline-block;
     font-size: 22px;

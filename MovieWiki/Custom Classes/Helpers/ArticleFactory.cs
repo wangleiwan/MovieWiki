@@ -1,10 +1,12 @@
-﻿using System;
+﻿// Contributors: Nick Rose
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace MovieWiki.Custom_Classes
 {
+    // A helper class that returns Article subtype instances. Uses the Factory design pattern
     public class ArticleFactory
     {
         // Used when building an article's template

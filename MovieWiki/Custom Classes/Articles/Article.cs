@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿//Contributors: Noe Ascenio, Nick Rose
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -7,12 +8,15 @@ using System;
 
 namespace MovieWiki.Custom_Classes
 {
+    // The parent class for all Article subtypes
     public abstract class Article
     {
+        // These fields mimick what the database tables have
         public int ArticleId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
+        // Parses (string) XML from the database and assigns the values to Article's properties
         public virtual void ParseData(string articleData)
         {
             var xml = XElement.Parse(articleData);
@@ -20,6 +24,7 @@ namespace MovieWiki.Custom_Classes
             Title = xml.Elements("Title").FirstOrDefault().Value;
         }
 
+        // Builds web controls based on the fields Article has
         public virtual List<Panel> BuildControls()
         {
             var panels = new List<Panel>();

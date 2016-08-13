@@ -1,4 +1,4 @@
-﻿//Contributors: Lei Wang
+﻿//Contributors: Lei Wang, Noe Ascenio, Nick Rose
 
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using System.Xml.Linq;
 
 namespace MovieWiki.Web_Forms
 {
+    // webform is created dynamically from options choosen in ChooseArticleToCreate webform
     public partial class FillArticleContents : System.Web.UI.Page
     {
         private ArticleFactory _articleFactory = new ArticleFactory();
@@ -83,7 +84,8 @@ namespace MovieWiki.Web_Forms
                 lblError.Text = "An article with that title already exists";
             }
         }
-
+        
+        //nav bar control event handlers, see Default.aspx.cs for more information
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session[Global.ActiveUserAccount] = null;

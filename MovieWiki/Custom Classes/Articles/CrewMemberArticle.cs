@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Contributors: Noe Ascenio, Nick Rose
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,9 @@ using System.Xml.Linq;
 
 namespace MovieWiki.Custom_Classes
 {
+    // A subtype of PersonArticle (and thus Article, too)
+    // Does the same things as Article but overrides some of the methods
+    // to make it more specific to its own properties
     public class CrewMemberArticle : PersonArticle
     {
         private RoleSectionFactory _roleSectionFactory = new RoleSectionFactory();
@@ -30,6 +34,7 @@ namespace MovieWiki.Custom_Classes
             var parsedXml = XElement.Parse(descriptionXml);
         }
 
+        // Parses (string) XML from the database and assigns their values to specific CrewMember properties
         public override void ParseData(string articleData)
         {
             base.ParseData(articleData);
@@ -45,6 +50,7 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
+        // Adds new RoleSection to Roles list 
         private void AddRoles(string[] roles, string[] roleValues = null)
         {
             if (roles != null)
@@ -58,6 +64,7 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
+        // Builds additional web controls with CrewMemberArticle Class
         public override List<Panel> BuildControls()
         {
             var basePanels = base.BuildControls();
@@ -70,6 +77,7 @@ namespace MovieWiki.Custom_Classes
             return basePanels;
         }
 
+        // Serializes ASP additional table content into database-ready XML for CrewMemberArticle subtype
         public override XElement ComposeXml(Control panel)
         {
             var xml = new XElement(this.GetType().Name);

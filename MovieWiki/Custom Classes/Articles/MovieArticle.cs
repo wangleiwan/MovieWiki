@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Contributors: Noe Ascenio, Nick Rose
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,12 +10,12 @@ using System.Xml.Linq;
 
 namespace MovieWiki.Custom_Classes
 {
+    // A subtype of Article, see Article.cs for details on the methods
     public class MovieArticle : Article
     {
         public string Theme { get; set; }
         public string Characters { get; set; }
         public string Language { get; set; }
-        // change to TimeSpan?
         public string Duration { get; set; }
 
         public MovieArticle() { }
@@ -26,6 +27,7 @@ namespace MovieWiki.Custom_Classes
             ParseData(description);
         }
 
+        // Retrieves MovieArticle class specific data from XML
         public override void ParseData(string articleData)
         {
             base.ParseData(articleData);
@@ -36,6 +38,7 @@ namespace MovieWiki.Custom_Classes
             Language = xml.Elements("Language").FirstOrDefault().Value;
         }
 
+        // Builds additional web controls with CharacterArticle properties
         public override List<Panel> BuildControls()
         {
             var basePanels = base.BuildControls();
@@ -51,6 +54,7 @@ namespace MovieWiki.Custom_Classes
             moviePanels.Add(WebControlBuilder.BuildPanel(language.Item1, language.Item2));
             moviePanels.Add(WebControlBuilder.BuildPanel(duration.Item1, duration.Item2));
 
+            // Insert all before the last description textarea
             basePanels.InsertRange(1, moviePanels);
 
             return basePanels;

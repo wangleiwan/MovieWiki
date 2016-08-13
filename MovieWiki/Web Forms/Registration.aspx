@@ -1,5 +1,6 @@
-﻿<!--Contributors: Lei Wang -->
+﻿
 
+<!--Contributors: Lei Wang -->
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="MovieWiki.Web_Forms.Registration" %>
 
 <!DOCTYPE html>

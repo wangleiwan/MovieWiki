@@ -1,3 +1,5 @@
+--Contributors: Noe Ascenio, Nick Rose
+
 USE MovieWiki;
 GO
 

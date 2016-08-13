@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Contributors: Noe Ascenio, Nick Rose
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,11 +8,13 @@ using System.Xml.Linq;
 
 namespace MovieWiki.Custom_Classes
 {
+    // See Article.cs for comments on how the purpose of each method
     public abstract class PersonArticle : Article
     {
         public string Name { get; set; }
         public string Age { get; set; }
 
+        // Parses (string) XML from the database and assigns their values to specific PersonArticle properties
         public override void ParseData(string articleData)
         {
             base.ParseData(articleData);
@@ -20,6 +23,7 @@ namespace MovieWiki.Custom_Classes
             Age = xml.Elements("Age").FirstOrDefault().Value;
         }
 
+        // Builds additional web controls for MokiWIki properties
         public override List<Panel> BuildControls()
         {
             var basePanels = base.BuildControls();

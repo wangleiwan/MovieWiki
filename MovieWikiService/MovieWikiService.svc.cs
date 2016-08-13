@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Contributors: Nick Rose
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,11 +12,14 @@ using System.Web.Configuration;
 
 namespace MovieWikiService
 {
+    // A concrete class implementing the service interface, populating the methods with logic
     public class MovieWikiService : IMovieWikiService
     {
+        // connection string to database
         private readonly string MovieWikiConnectionString = WebConfigurationManager
                     .ConnectionStrings["MovieWikiConnectionString"].ConnectionString;
 
+        // The following methods insert new record to tables in MovieWiki Database
         public int InsertWikiArticle(string articleType, string title, string descriptionXml)
         {
             using (var connection = new SqlConnection())
@@ -69,6 +73,7 @@ namespace MovieWikiService
             }
         }
 
+        // executes update command for UserAccount table
         public int UpdateWikiArticle(int articleId, string descriptionXml)
         {
             using (var connection = new SqlConnection())
@@ -87,6 +92,7 @@ namespace MovieWikiService
             }
         }
 
+        // The following methods delete existing records from tables within MovieWiki database
         public int DeleteWikiArticle(int articleId)
         {
             if (DeleteWikiArticleEditHistory(articleId) == 0) return 0;
@@ -123,6 +129,7 @@ namespace MovieWikiService
             }
         }
 
+        // this section returns datasets with table specific records
         public DataSet GetAllWikiArticles()
         {
             return GetAllRecords("WikiArticle");
@@ -138,6 +145,7 @@ namespace MovieWikiService
             return GetAllRecords("UserAccount");
         }
 
+        // depending on table name retrieves all records within that table
         private DataSet GetAllRecords(string tableName)
         {
             var dataSet = new DataSet();

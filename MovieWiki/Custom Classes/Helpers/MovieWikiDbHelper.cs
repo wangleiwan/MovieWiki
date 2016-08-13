@@ -1,4 +1,5 @@
-﻿using MovieWiki.MovieWikiServiceReference;
+﻿// Contributors: Nick Rose
+using MovieWiki.MovieWikiServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,11 +10,15 @@ using System.Web.Configuration;
 
 namespace MovieWiki.Custom_Classes
 {
+    // A helper class that stores static properties that contain all the database information
     public static class MovieWikiDbHelper
     {
+        // Factory instance to help create Article instances
         private static readonly ArticleFactory ArticleFactory = new ArticleFactory();
+        // Client for the WCF service
         private static MovieWikiServiceClient movieWikiServiceClient = new MovieWikiServiceClient();
 
+        // Static collections of all database data
         private static List<UserAccount> _allUserAccounts;
         public static List<UserAccount> AllUserAccounts
         {
@@ -65,6 +70,7 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
+        // These enums are used when parsing a DataSet so as to avoid magic strings
         private enum UserAccountTable
         {
             AccountId = 0,
@@ -87,6 +93,8 @@ namespace MovieWiki.Custom_Classes
             AccountId = 2,
             EditTimestamp = 3
         }
+
+        // Methods insert and update recored on  and update static Objects
 
         public static bool InsertWikiArticleEditHistory(int aticleId, int accountId, DateTime timestamp)
         {
@@ -129,11 +137,12 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
+        // Each time there is an insert/update/delete, this property gets updated
         private static void UpdateWikiArticleProp()
         {
             AllWikiArticles = GetAllWikiArticles();
         }
-
+        
         public static bool DeleteWikiArticle(int articleId)
         {
             if (movieWikiServiceClient.DeleteWikiArticle(articleId) >= 1)
@@ -148,6 +157,7 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
+        // Converts dataset to list of Article objects
         private static List<Article> GetAllWikiArticles()
         {
             var dataSet = movieWikiServiceClient.GetAllWikiArticles();
@@ -167,12 +177,14 @@ namespace MovieWiki.Custom_Classes
             return wikiArticles;
         }
 
+        // Search by title in static WikiArticle list object 
         public static Article GetWikiArticleByTitle(string title)
         {
             return AllWikiArticles.FirstOrDefault(w => string.Equals(w.Title, title, StringComparison.OrdinalIgnoreCase));
-            //return AllWikiArticles.FirstOrDefault(w => w.Title == title);
         }
 
+        // Used by the search feature in the navbar; it takes a string search
+        // and returns the link to that article, or null if nothing was found
         public static string GetWikiArticleUrlBySearch(string search)
         {
             var matchingArticle = GetWikiArticleByTitle(search);
@@ -182,17 +194,19 @@ namespace MovieWiki.Custom_Classes
                 : null;
         }
 
-
+        // Search by id property in static WikiArticle list object 
         public static Article GetWikiArticleById(int id)
         {
             return AllWikiArticles.FirstOrDefault(w => w.ArticleId == id);
         }
 
+        // Used to make sure there are no unique constraint violations when inserting a new Article
         public static bool IsExistingWikiArticle(string title)
         {
             return AllWikiArticles.Any(w => string.Equals(w.Title, title, StringComparison.OrdinalIgnoreCase));
         }
 
+        // Insert new record to UserAccount table in database
         public static bool InsertUserAccount(string username, string password)
         {
             if (IsExistingUsername(username)) return false;
@@ -208,11 +222,13 @@ namespace MovieWiki.Custom_Classes
             }
         }
 
+        // Each time there is an insert/update/delete, this property gets updated
         private static void UpdateUserAccountProp()
         {
             AllUserAccounts = GetAllUserAccounts();
         }
 
+        // Converts DataSet to list of UserAccount object
         private static List<UserAccount> GetAllUserAccounts()
         {
             var dataSet = movieWikiServiceClient.GetAllUserAccounts();
@@ -230,6 +246,7 @@ namespace MovieWiki.Custom_Classes
             return userAccounts;
         }
 
+        // Search for user in static UserAccount list object 
         public static UserAccount GetUserAccount(string username, string password)
         {
             return AllUserAccounts.FirstOrDefault(u => 
@@ -237,16 +254,19 @@ namespace MovieWiki.Custom_Classes
                 && u.Password == password);
         }
 
+        // Used to make sure the unique constraint of the UserAccount database table is not violated
         private static bool IsExistingUsername(string username)
         {
             return AllUserAccounts.Any(u => string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase));
         }
 
+        // The user "admin" can delete articles
         public static bool IsUserAdmin(string username)
         {
             return username.ToLower() == "admin";
         }
 
+        // Converts DataSet to list of WikiArticleEditHistory object
         private static List<WikiArticleEditHistory> GetAllWikiArticleEditHistories()
         {
             var dataSet = movieWikiServiceClient.GetAllWikiArticleEditHistories();
@@ -265,6 +285,7 @@ namespace MovieWiki.Custom_Classes
             return editHistories;
         }
 
+        // Each time there is an insert/update/delete, this property gets updated
         private static void UpdateWikiArticleEditHistoriesProp()
         {
             AllWikiArticleEditHistories = GetAllWikiArticleEditHistories();

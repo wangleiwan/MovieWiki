@@ -1,4 +1,4 @@
-﻿//Contributors: Lei Wang
+﻿//Contributors: Lei Wang, Noe Ascenio, Nick Rose
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,7 @@ using MovieWiki.Custom_Classes;
 
 namespace MovieWiki.Web_Forms
 {
+    // A web form which lets the user choose what kind of Article subtype they want to make
     public partial class ChooseArticleToCreate : System.Web.UI.Page
     {
         private string _queryString = "?articleType=";
@@ -26,6 +27,7 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        //navbar button event, see Default.aspx for more infromation
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session[Global.ActiveUserAccount] = null;
@@ -44,10 +46,10 @@ namespace MovieWiki.Web_Forms
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                 upModal.Update();
             }
-
-
         }
 
+        // Logic for making the controls visible/hidden depending on what different Article
+        // subtypes there are
         protected void rbPersonArticle_CheckedChanged(object sender, EventArgs e)
         {
             personArticleTypes.Visible = true;
@@ -83,6 +85,8 @@ namespace MovieWiki.Web_Forms
             personCrewMemberRoles.Visible = false;
         }
 
+        // Captures the Article type a user wanted to create and prepares it to
+        // be forwarded to FillArticleContents.aspx within a query string
         protected void btnCreateTemplate_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
@@ -117,6 +121,7 @@ namespace MovieWiki.Web_Forms
             Response.Redirect("FillArticleContents.aspx" + _queryString);
         }
 
+        // Validates that the user chose a valid Article to create
         protected void vldArticle_ServerValidate(object source, ServerValidateEventArgs args)
         {
             // At least one parent radio checked

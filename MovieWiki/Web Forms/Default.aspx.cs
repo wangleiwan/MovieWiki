@@ -1,4 +1,4 @@
-﻿//Contributors: Lei Wang
+﻿//Contributors: Lei Wang, Noe Ascenio, Nick Rose
 
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using MovieWiki.Custom_Classes;
 
 namespace MovieWiki.Web_Forms
 {
+    // default webform for the application
     public partial class Default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -21,6 +22,7 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        // If the user isn't logged in, then prompt a login
         private void PromptLogin()
         {
             var sessUserAccount = Session[Global.ActiveUserAccount];
@@ -35,11 +37,14 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        // Shows all contributions a user made to articles
         public void DisplayAccountInformation()
         {
+            // Creates UserAccount object
             var activeUser = Session[Global.ActiveUserAccount] as UserAccount;
             lblGreeting.Text = string.Format("Account details for: <b>{0}</b>", activeUser.Username);
 
+            // Retrieves links to articles that have ever changed
             var userArticleEdits = from edit in MovieWikiDbHelper.AllWikiArticleEditHistories
                                    join article in MovieWikiDbHelper.AllWikiArticles
                                    on edit.ArticleId equals article.ArticleId
@@ -49,6 +54,7 @@ namespace MovieWiki.Web_Forms
 
             lblArticleEdits.Visible = userArticleEdits.Count() > 0;
 
+            // creates links to articles related to UserAccount
             foreach (var userArticleEdit in userArticleEdits)
             {
                 var hyperLinkText = userArticleEdit.Article.Title;
@@ -62,14 +68,18 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        // nav bar event handlers
+        // remove user from session and redirects until login screen
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session[Global.ActiveUserAccount] = null;
             Response.Redirect("Default.aspx");
         }
 
+        // search event redirects to ShowArticle.aspx with Wiki Article to display
         protected void btnsearchbtn_Click(object sender, EventArgs e)
         {
+            // redirection to specific WikiArticle if found in static class
             var searchResultUrl = MovieWikiDbHelper.GetWikiArticleUrlBySearch(searchInput.Text);
             if (searchResultUrl != null)
             {              
@@ -83,6 +93,7 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        // Fire bootstrap events to display a modal
         protected void showAccountInfo_ServerClick(object sender, EventArgs e)
         {
             DisplayAccountInformation();
@@ -97,9 +108,10 @@ namespace MovieWiki.Web_Forms
             upRecentModal.Update();
         }
 
+        // Shows at most 10 recent articles created on MovieWiki
         private void DisplayRecentArticles()
         {
-
+            // retrieves last 10 articles created
             var recentArticles = (from edit in MovieWikiDbHelper.AllWikiArticleEditHistories
                                   join article in MovieWikiDbHelper.AllWikiArticles
                                   on edit.ArticleId equals article.ArticleId
@@ -108,6 +120,7 @@ namespace MovieWiki.Web_Forms
             
             int result = recentArticles.Count();
             
+            // Formats modal to display recent article informaiton
             lblRecentEdits.Text = recentArticles.Count() > 0
                 ? result + " articles most recently contributed to:"
                 : "No articles were created yet";

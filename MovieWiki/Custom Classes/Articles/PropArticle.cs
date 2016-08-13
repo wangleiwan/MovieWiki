@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Contributors: Noe Ascenio, Nick Rose
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,7 @@ using System.Xml.Linq;
 
 namespace MovieWiki.Custom_Classes
 {
+    // See Article.cs for comments on the purpose of each method
     public class PropArticle : Article
     {
         public string MoviesFeaturedIn { get; set; }
@@ -14,6 +16,7 @@ namespace MovieWiki.Custom_Classes
 
         public PropArticle() { }
 
+        // Constructor for PropArticle class
         public PropArticle(int articleId, string title, string description)
         {
             ArticleId = articleId;
@@ -21,6 +24,7 @@ namespace MovieWiki.Custom_Classes
             ParseData(description);
         }
 
+        // Parses (string) XML from the database and assigns their values to specific PropArticle properties
         public override void ParseData(string articleData)
         {
             base.ParseData(articleData);
@@ -29,6 +33,7 @@ namespace MovieWiki.Custom_Classes
             Function = xml.Elements("Function").FirstOrDefault().Value;
         }
 
+        // Builds additional web controls for MovieWiki properties
         public override List<Panel> BuildControls()
         {
             var basePanels = base.BuildControls();

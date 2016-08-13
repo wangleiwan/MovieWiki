@@ -1,5 +1,6 @@
-﻿<!--Contributors: Lei Wang -->
+﻿
 
+<%--contributors: lei wang--%>
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FillArticleContents.aspx.cs" Inherits="MovieWiki.Web_Forms.FillArticleContents" %>
 
 <!DOCTYPE html>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Contributors: Nick Rose
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Text;
 
 namespace MovieWikiService
 {
+    // A service interface defining several basic database operations
     [ServiceContract]
     public interface IMovieWikiService
     {

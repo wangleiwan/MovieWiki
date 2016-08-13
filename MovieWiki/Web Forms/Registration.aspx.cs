@@ -1,4 +1,4 @@
-﻿//Contributors: Lei Wang
+﻿//Contributors: Lei Wang, Nick Rose
 
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,8 @@ using MovieWiki.Custom_Classes;
 
 namespace MovieWiki.Web_Forms
 {
+    // web form allows user access to application if they dont already have have
+    // log in credentials
     public partial class Registration : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -19,6 +21,7 @@ namespace MovieWiki.Web_Forms
 
         }
 
+        // makes sure user does not exist before adding them to UserAccount class and within database
         protected void btnCreateAccount_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
@@ -36,6 +39,7 @@ namespace MovieWiki.Web_Forms
                 lblCreateAccountErrorMsg.Text = string.Format(@"The account ""{0}"" already exists", username);
             }
         }
+
         protected void btnCancelCreateAccount_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx");

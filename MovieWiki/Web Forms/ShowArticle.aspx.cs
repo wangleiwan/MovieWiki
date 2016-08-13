@@ -1,4 +1,4 @@
-﻿//Contributors: Lei Wang
+﻿//Contributors: Lei Wang, Noe Ascenio, Nick Rose
 
 using MovieWiki.Custom_Classes;
 using System;
@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace MovieWiki.Web_Forms
 {
+    // web form displays Article to be displays with necessary controls
     public partial class ShowArticle : System.Web.UI.Page
     {
         private Article _article;
@@ -18,6 +19,7 @@ namespace MovieWiki.Web_Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // gets id of article to display from redirection of other web forms
             var id = Request.QueryString["id"];
             if (id == null)
             {
@@ -29,6 +31,8 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        // Gets all the respective Article web controls and builds them. These web controls will be populated
+        // with data, too
         private void GetAndDisplayArticleControls(int id)
         {
             _article = MovieWikiDbHelper.GetWikiArticleById(id);
@@ -49,11 +53,13 @@ namespace MovieWiki.Web_Forms
             ToggleControls(pnlArticleContent);
         }
 
+        // changes state of Article web controls to allow changes in Article content
         protected void btnEditSave_Click(object sender, EventArgs e)
         {
             ToggleEditSaveButtonText();
         }
 
+        // Makes the Edit button turn into a Save button, and vice versa
         private void ToggleEditSaveButtonText()
         {
             if (btnEditSave.Text == Edit)
@@ -67,6 +73,7 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        // If a user edited the article, they can save the changes to the database here
         private void UpdateEdits()
         {
             var xml = _article.ComposeXml(pnlArticleContent);
@@ -77,7 +84,6 @@ namespace MovieWiki.Web_Forms
             if (MovieWikiDbHelper.UpdateWikiArticle(_article.ArticleId, xml.ToString()))
             {
                 MovieWikiDbHelper.InsertWikiArticleEditHistory(_article.ArticleId, editor.AccountId, timestamp);
-                // TODO is this session variable necessary?
                 Session[Global.ActiveArticle] = _article;
             }
             else
@@ -86,6 +92,7 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        // Toggles the editability of the web controls on the page
         private void ToggleControls(Control c)
         {
             if (c.HasControls())
@@ -113,7 +120,7 @@ namespace MovieWiki.Web_Forms
             }
         }
 
-        // for user "admin" only
+        // For user "admin" only; they can delete articles
         protected void btnDeleteArticle_Click(object sender, EventArgs e)
         {
             if (!DeleteArticle())
@@ -126,12 +133,13 @@ namespace MovieWiki.Web_Forms
             }
         }
 
+        // uses helper to remove article from database
         private bool DeleteArticle()
         {
             return MovieWikiDbHelper.DeleteWikiArticle(_article.ArticleId);
         }
 
-        //navbar button event
+        //navbar button event, see Default.aspx for more infromation
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session[Global.ActiveUserAccount] = null;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Contributors: Nick Rose
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
@@ -6,6 +7,7 @@ using System.Web;
 
 namespace MovieWiki.Custom_Classes
 {
+    // A class used to track the current user surfing our website
     public class UserAccount
     {
         private readonly int _accountId;
@@ -18,6 +20,7 @@ namespace MovieWiki.Custom_Classes
         public string Password { get { return _password; } }
         public bool IsAdmin { get { return _isAdmin; } }
 
+        // Constructor for UserAccount class
         public UserAccount(int accountId, string username, string password)
         {
             _accountId = accountId;

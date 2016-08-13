@@ -1,6 +1,8 @@
-﻿<!--Contributors: Lei Wang -->
+﻿
 
+<%--Contributors: Lei Wang--%>
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="MovieWiki.Web_Forms.Default" %>
+
 
 <!DOCTYPE html>
 
@@ -113,7 +115,7 @@
         </div><!-- /.modal -->
       </div>
 
-    <div>
+    <div id="mainSection">
         <div id="welcomeTitle" class="row text-center">
             <h1><asp:Label ID="lblWelcome" runat="server"></asp:Label></h1>
         </div>
